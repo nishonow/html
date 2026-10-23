@@ -16,7 +16,7 @@ const SERVICES = [
   { icon: "brain", title: "Pediatric Neurology & Epileptology", text: "Diagnosis and long-term follow-up of seizures, developmental delays and other neurological conditions in children." },
   { icon: "drop", title: "Pediatric Oncology & Hematology", text: "Consultations and supportive care for children with blood disorders and cancer, coordinated with specialised hospitals." },
   { icon: "wave", title: "Ultrasound Diagnostics", text: "Ultrasound of internal organs for children and adults, with results explained on the same day." },
-  { icon: "pulse", title: "ECG & Diagnostics", text: "Electrocardiography and basic diagnostics, so you get answers without going to several places." },
+  { icon: "pulse", title: "ECG & Laboratory", text: "Electrocardiography and lab tests on site (lab open Mon–Fri 08:00–12:00), so you get answers without going to several places." },
   { icon: "hand", title: "Physical Therapy", text: "Rehabilitation and physiotherapy for children and adults, led by a highest-category specialist." },
   { icon: "heart", title: "Women's Health & Doula", text: "Obstetrics-gynecology consultations and doula support before, during and after birth." },
   { icon: "chat", title: "Psychology", text: "Support for children, parents and families from a psychologist who works alongside our doctors." },
@@ -25,6 +25,7 @@ const SERVICES = [
 
 const DOCTORS = [
   { name: "Nancy Yau", role: "Pediatrician (USA)", years: 17, tags: ["Pediatrics", "English"], photo: "" },
+  { name: "Jonathan Williams", role: "Pediatrician", years: null, tags: ["Pediatrics"], photo: "" },
   { name: "Irina Pak", role: "Pediatrician & Therapist", years: 16, tags: ["Pediatrics", "Adults"], photo: "" },
   { name: "Aiza Upaeva", role: "Pediatric Neurologist, Epileptologist", years: 10, tags: ["Neurology", "Epilepsy"], photo: "" },
   { name: "Makhabat Alieva", role: "Physiotherapist, highest category", years: 24, tags: ["Rehabilitation"], photo: "" },

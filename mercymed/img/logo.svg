@@ -1,11 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none">
-  <rect width="48" height="48" rx="14" fill="url(#g)"/>
-  <path d="M24 35.5s-11-6.6-11-14.3A6.2 6.2 0 0 1 24 17.6a6.2 6.2 0 0 1 11 3.6c0 7.7-11 14.3-11 14.3Z" fill="#fff"/>
-  <path d="M22.2 21.5h3.6v3.1h3.1v3.6h-3.1v3.1h-3.6v-3.1h-3.1v-3.6h3.1z" fill="#F28C28"/>
-  <defs>
-    <linearGradient id="g" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#FFC233"/>
-      <stop offset="1" stop-color="#F28C28"/>
-    </linearGradient>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs><clipPath id="c"><rect width="100" height="100"/></clipPath></defs>
+  <g clip-path="url(#c)">
+    <rect width="100" height="100" fill="#E91E24"/>
+    <path d="M10 100V9l40 30 50-38v99z" fill="#F15A22"/>
+    <path d="M20 100V29l30 22 50-38v87z" fill="#F47B20"/>
+    <path d="M30 100V40l20 22 50-38v76z" fill="#F7941D"/>
+    <circle cx="97" cy="75" r="25" fill="#FDB813"/>
+    <circle cx="97" cy="75" r="16" fill="#FFF200"/>
+  </g>
 </svg>

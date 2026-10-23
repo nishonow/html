@@ -15,11 +15,11 @@
   <meta property="og:description" content="Pediatrics, family medicine and diagnostics in Bishkek. English, Russian and Kyrgyz spoken.">
   <meta property="og:url" content="https://mercymed.kg/">
   <meta property="og:image" content="https://mercymed.kg/img/og.jpg">
-  <meta name="theme-color" content="#F28C28">
+  <meta name="theme-color" content="#F7941D">
   <link rel="icon" href="img/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <script type="application/ld+json">
   {
@@ -49,7 +49,7 @@
     <div class="container header__inner">
       <a href="#home" class="logo" aria-label="MercyMed home">
         <img src="img/logo.svg" alt="" width="40" height="40">
-        <span>Mercy<b>Med</b></span>
+        <span class="wordmark">MERCY<b>MED</b></span>
       </a>
       <nav class="nav" id="nav" aria-label="Main">
         <a href="#about">About</a>
@@ -88,7 +88,7 @@
           <ul class="hero__facts">
             <li><b>EN · RU · KY</b><span>languages spoken</span></li>
             <li><b>Home visits</b><span>for sick children</span></li>
-            <li><b>0–99</b><span>children and adults</span></li>
+            <li><b>5.0 ★</b><span>rating on 2GIS</span></li>
           </ul>
         </div>
         <div class="hero__visual" aria-hidden="true">
@@ -97,13 +97,13 @@
             <div class="hero__icon"><svg viewBox="0 0 24 24"><path d="M12 21s-8-4.8-8-10.4A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 8 2.6C20 16.2 12 21 12 21Z"/></svg></div>
             <p class="hero__card-title">Online booking</p>
             <p class="hero__card-big">Under 1 minute</p>
-            <p class="hero__card-sub">Choose a doctor · confirm on WhatsApp</p>
+            <p class="hero__card-sub">Send your details · we confirm on WhatsApp</p>
           </div>
           <div class="hero__card hero__card--float">
             <span class="dot"></span> Booking confirmed via WhatsApp
           </div>
           <div class="hero__card hero__card--float2">
-            <b>6+</b> specialists
+            <b>7</b> specialists
           </div>
         </div>
       </div>
@@ -113,7 +113,7 @@
       <div class="container about">
         <div class="about__media">
           <div class="photo-ph"><span>Clinic photo</span></div>
-          <div class="about__badge">Included in the U.S. Embassy in Bishkek's medical assistance list</div>
+          <div class="about__badge"><b>5.0 ★</b> on 2GIS from 117 ratings · listed by the U.S. Embassy in Bishkek</div>
         </div>
         <div>
           <p class="eyebrow">About us</p>
@@ -122,9 +122,9 @@
           <p>Families choose us because visits are unhurried, explanations are clear, and we keep caring for patients after they leave the room. When a case needs a hospital or another specialist, we refer and follow up.</p>
           <ul class="checks">
             <li>Individual and family care plans</li>
-            <li>Ultrasound and ECG on site</li>
+            <li>Ultrasound, ECG and laboratory on site</li>
             <li>Home visits for children</li>
-            <li>Electronic medical records</li>
+            <li>Consultations from 1,750 som</li>
           </ul>
         </div>
       </div>
@@ -191,14 +191,9 @@
       <div class="container booking">
         <div class="booking__info">
           <p class="eyebrow">Online booking</p>
-          <h2>Book an appointment in one minute</h2>
-          <p>Fill in the form and press send. WhatsApp opens with your request already written; our administrator replies to confirm the time.</p>
-          <ol class="steps">
-            <li><b>Fill in the form</b><span>Name, date of birth and phone number</span></li>
-            <li><b>Send on WhatsApp</b><span>The message is generated for you</span></li>
-            <li><b>Get confirmation</b><span>We reply with the exact time</span></li>
-          </ol>
-          <p class="muted">Prefer to call? <a href="tel:+996770231813" class="js-phone">+996 770 231 813</a></p>
+          <h2>Book through WhatsApp</h2>
+          <p>Enter your details and press the button. WhatsApp opens with a ready message to our administrator, who replies with a time that suits you.</p>
+          <p class="muted">Prefer to call? <a href="tel:+996770231813">+996 770 231 813</a></p>
         </div>
         <form class="form" id="bookingForm" novalidate>
           <div class="form__row">
@@ -209,14 +204,8 @@
             <label>Date of birth<input type="date" name="dob" required></label>
             <label>Mobile number<input type="tel" name="phone" autocomplete="tel" placeholder="+996 ___ ___ ___" required></label>
           </div>
-          <div class="form__row">
-            <label>Service<select name="service" id="serviceSelect"><option value="">Not sure yet</option></select></label>
-            <label>Doctor<select name="doctor" id="doctorSelect"><option value="">Any available</option></select></label>
-          </div>
-          <label>Preferred date<input type="date" name="date"></label>
           <p class="form__error" id="formError" role="alert"></p>
           <button type="submit" class="btn btn--wa btn--block">Send via WhatsApp</button>
-          <p class="form__note">By sending you agree to the processing of your personal data.</p>
         </form>
       </div>
     </section>
@@ -289,11 +278,11 @@
             <li><span>Address</span><b>Isakeeva St. 18/15, block 3<br>Ala-Too residential complex, Bishkek</b></li>
             <li><span>Phone & WhatsApp</span><a href="tel:+996770231813">+996 770 231 813</a></li>
             <li><span>Email</span><a href="mailto:medicalcenter@mercymed.kg">medicalcenter@mercymed.kg</a></li>
-            <li><span>Opening hours</span><b>Mon–Fri 09:00–18:00<br>Sat 09:00–14:00</b></li>
+            <li><span>Opening hours</span><b>Clinic opens at 09:00<br>Laboratory: Mon–Fri 08:00–12:00</b></li>
           </ul>
         </div>
         <div class="map">
-          <iframe title="MercyMed on the map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Isakeeva+18+Bishkek&output=embed"></iframe>
+          <iframe title="MercyMed on the map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=MercyMed+Isakeeva+18%2F15+Bishkek&output=embed"></iframe>
         </div>
       </div>
     </section>
@@ -302,7 +291,7 @@
   <footer class="footer">
     <div class="container footer__inner">
       <div>
-        <a href="#home" class="logo logo--light"><img src="img/logo.svg" alt="" width="36" height="36"><span>Mercy<b>Med</b></span></a>
+        <a href="#home" class="logo logo--light"><img src="img/logo.svg" alt="" width="36" height="36"><span class="wordmark">MERCY<b>MED</b></span></a>
         <p>Multi-specialty medical center in Bishkek, Kyrgyzstan.</p>
       </div>
       <nav aria-label="Footer">

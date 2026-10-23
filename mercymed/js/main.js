@@ -38,7 +38,7 @@ function render() {
       <div class="doctor__body">
         <h3>${d.name}</h3>
         <p class="doctor__role">${d.role}</p>
-        <p class="doctor__exp">${d.years} years of experience</p>
+        ${d.years ? `<p class="doctor__exp">${d.years} years of experience</p>` : ""}
         <div class="doctor__tags">${d.tags.map((t) => `<span>${t}</span>`).join("")}</div>
       </div>
     </article>`).join("");
@@ -47,11 +47,6 @@ function render() {
     <a href="${p.url}" target="_blank" rel="noopener" class="insta__item" aria-label="${p.alt}">
       ${p.image ? `<img src="${p.image}" alt="${p.alt}" loading="lazy">` : ""}
     </a>`).join("");
-
-  document.getElementById("serviceSelect").insertAdjacentHTML("beforeend",
-    SERVICES.map((s) => `<option>${s.title}</option>`).join(""));
-  document.getElementById("doctorSelect").insertAdjacentHTML("beforeend",
-    DOCTORS.map((d) => `<option>${d.name} (${d.role})</option>`).join(""));
 
   document.getElementById("year").textContent = new Date().getFullYear();
 }
@@ -90,9 +85,6 @@ function setupBooking() {
       `Date of birth: ${formatDate(data.dob)}`,
       `Mobile: ${data.phone.trim()}`,
     ];
-    if (data.service) lines.push(`Service: ${data.service}`);
-    if (data.doctor) lines.push(`Doctor: ${data.doctor}`);
-    if (data.date) lines.push(`Preferred date: ${formatDate(data.date)}`);
 
     window.open(`https://wa.me/${CLINIC.whatsapp}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank", "noopener");
   });
