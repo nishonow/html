@@ -18,6 +18,7 @@ function detectLang() {
 const t = (key) => I18N[lang][key] ?? I18N.ru[key] ?? "";
 const num = (n) => n.toLocaleString(NUMBER_LOCALE[lang]);
 const plural = (n, word) => PLURAL[lang](n, WORDS[word][lang]);
+const waLink = (text) => `https://wa.me/${CLINIC.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
 const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const PERSON_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>';
@@ -51,8 +52,37 @@ function renderTeam() {
         <h3>${name}</h3>
         <p class="doctor__role">${d.role[lang]}</p>
         ${meta.length ? `<p class="doctor__meta">${meta.join("<br>")}</p>` : ""}
+        <a class="doctor__book" href="${waLink(t("wa_doctor").replace("{name}", name))}" target="_blank" rel="noopener">${t("doc_book")} <span class="arrow" aria-hidden="true">→</span></a>
       </li>`;
   }).join("");
+}
+
+const FAQ_COUNT = 6;
+
+function renderFaq() {
+  const items = Array.from({ length: FAQ_COUNT }, (_, i) => [t(`faq_${i + 1}_q`), t(`faq_${i + 1}_a`)]);
+  document.getElementById("faqList").innerHTML = items.map(([q, a]) => `
+    <details class="faq__item">
+      <summary>${q}<span class="faq__icon" aria-hidden="true"></span></summary>
+      <div class="faq__answer"><p>${a}</p></div>
+    </details>`).join("");
+  document.getElementById("faqLd").textContent = JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+  });
+}
+
+function renderPhotos() {
+  if (PHOTOS.hero) {
+    document.querySelector(".hero__art").innerHTML = `<img src="${PHOTOS.hero}" alt="MercyMed" fetchpriority="high">`;
+    document.querySelector(".hero__art").classList.add("hero__art--photo");
+  }
+  if (PHOTOS.gallery.length) {
+    document.getElementById("gallery").hidden = false;
+    document.getElementById("galleryList").innerHTML = PHOTOS.gallery
+      .map((src) => `<figure class="reveal"><img src="${src}" alt="${t("gallery_title")}" loading="lazy"></figure>`).join("");
+  }
 }
 
 function applyLang(next, { animate = false } = {}) {
@@ -74,6 +104,7 @@ function applyLang(next, { animate = false } = {}) {
     renderServices();
     renderPlans();
     renderTeam();
+    renderFaq();
     observeReveal(document.querySelectorAll(".reveal:not(.is-visible)"));
     fitNav();
 
@@ -143,7 +174,7 @@ function setupBooking() {
       `${t("wa_phone")}: ${data.phone.trim()}`,
     ].join("\n");
 
-    window.open(`https://wa.me/${CLINIC.whatsapp}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
+    window.open(waLink(message), "_blank", "noopener");
   });
 }
 
@@ -189,7 +220,7 @@ function setupHeader() {
   });
 
   document.querySelectorAll(".js-wa").forEach((a) => {
-    a.href = `https://wa.me/${CLINIC.whatsapp}`;
+    a.href = waLink();
     a.target = "_blank";
     a.rel = "noopener";
   });
@@ -197,6 +228,7 @@ function setupHeader() {
   document.getElementById("year").textContent = new Date().getFullYear();
 }
 
+renderPhotos();
 applyLang(lang);
 setupBooking();
 setupHeader();

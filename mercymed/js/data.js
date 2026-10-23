@@ -7,6 +7,11 @@ const CLINIC = {
   portalUrl: "#",
 };
 
+const PHOTOS = {
+  hero: "",
+  gallery: [],
+};
+
 const SERVICES = [
   {
     ru: ["Педиатрия", "Осмотры, прививки и лечение детей от рождения до 18 лет."],

@@ -63,6 +63,7 @@
         <a href="#team" data-i18n="nav_team">Врачи</a>
         <a href="#education" class="nav__extra" data-i18n="nav_education">Обучение</a>
         <a href="#charity" class="nav__extra" data-i18n="nav_charity">Благотворительность</a>
+        <a href="#faq" class="nav__extra" data-i18n="nav_faq">Вопросы</a>
         <a href="#contact" data-i18n="nav_contact">Контакты</a>
       </nav>
       <div class="header__end">
@@ -81,7 +82,6 @@
     <section class="hero" id="top">
       <div class="container hero__grid">
         <div class="hero__text">
-          <p class="hero__kicker reveal" data-i18n="hero_kicker">Медицинский центр в Бишкеке</p>
           <h1 class="reveal" data-i18n="hero_title">Врачи, у которых есть время для вашей семьи.</h1>
           <p class="lead reveal" data-i18n="hero_text">Педиатрия, семейная медицина и узкие специалисты в одном месте. Говорим на русском, кыргызском и английском.</p>
           <div class="actions reveal">
@@ -104,10 +104,11 @@
         </div>
       </div>
       <div class="container">
-        <dl class="facts">
-          <div class="reveal"><dt>8</dt><dd data-i18n="fact_doctors">врачей в команде</dd></div>
-          <div class="reveal"><dt>3</dt><dd data-i18n="fact_langs">языка общения</dd></div>
-          <div class="reveal"><dt>5,0</dt><dd data-i18n="stat_2gis">оценка в 2ГИС</dd></div>
+        <dl class="info">
+          <div class="reveal"><dt data-i18n="info_address">Адрес</dt><dd><a href="https://2gis.kg/bishkek/firm/70000001080819179" target="_blank" rel="noopener" data-i18n="info_address_v">ул. Исакеева, 18/15, ЖК «Ала-Тоо»</a></dd></div>
+          <div class="reveal"><dt data-i18n="info_hours">Часы работы</dt><dd data-i18n="info_hours_v">Открываемся в 09:00</dd></div>
+          <div class="reveal"><dt data-i18n="info_phone">Телефон и WhatsApp</dt><dd><a href="tel:+996770231813">+996 770 231 813</a></dd></div>
+          <div class="reveal"><dt data-i18n="info_price">Приём врача</dt><dd data-i18n="info_price_v">от 1 750 сом</dd></div>
         </dl>
       </div>
     </section>
@@ -121,11 +122,19 @@
         </div>
       </div>
       <div class="container">
-        <dl class="facts facts--about">
+        <dl class="facts">
+          <div class="reveal"><dt>8</dt><dd data-i18n="fact_doctors">врачей в команде</dd></div>
+          <div class="reveal"><dt>3</dt><dd data-i18n="fact_langs">языка общения</dd></div>
+          <div class="reveal"><dt>5,0</dt><dd data-i18n="stat_2gis">оценка в 2ГИС</dd></div>
           <div class="reveal"><dt>9,6</dt><dd data-i18n="stat_odoctor">из 10 на odoctor.kg</dd></div>
-          <div class="reveal"><dt>100+</dt><dd data-i18n="stat_reviews">отзывов пациентов</dd></div>
-          <div class="reveal"><dt>10</dt><dd data-i18n="stat_services">направлений помощи</dd></div>
         </dl>
+      </div>
+    </section>
+
+    <section class="section section--tight" id="gallery" hidden>
+      <div class="container">
+        <h2 class="visually-hidden" data-i18n="gallery_title">Клиника изнутри</h2>
+        <div class="gallery" id="galleryList"></div>
       </div>
     </section>
 
@@ -180,7 +189,32 @@
       </div>
     </section>
 
-    <section class="section section--gray" id="booking">
+    <section class="section section--gray" id="reviews">
+      <div class="container">
+        <header class="section__head reveal">
+          <h2 data-i18n="reviews_title">Отзывы пациентов</h2>
+          <p data-i18n="reviews_sub"></p>
+        </header>
+        <div class="ratings">
+          <a class="rating reveal" href="https://2gis.kg/bishkek/firm/70000001080819179/tab/reviews" target="_blank" rel="noopener">
+            <span class="rating__score">5,0</span>
+            <span class="rating__stars" aria-hidden="true">★★★★★</span>
+            <span class="rating__scale" data-i18n="r_2gis_scale">из 5 в 2ГИС</span>
+            <span class="rating__meta" data-i18n="r_2gis_meta">117 оценок · 64 отзыва</span>
+            <span class="rating__link"><span data-i18n="r_read">Читать отзывы</span> <span class="arrow" aria-hidden="true">→</span></span>
+          </a>
+          <a class="rating reveal" href="https://odoctor.kg/clinics/bishkek/mercymed#reviews" target="_blank" rel="noopener">
+            <span class="rating__score">9,6</span>
+            <span class="rating__stars" aria-hidden="true">★★★★★</span>
+            <span class="rating__scale" data-i18n="r_odoctor_scale">из 10 на odoctor.kg</span>
+            <span class="rating__meta" data-i18n="r_odoctor_meta">36 отзывов</span>
+            <span class="rating__link"><span data-i18n="r_read">Читать отзывы</span> <span class="arrow" aria-hidden="true">→</span></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="booking">
       <div class="container split">
         <div class="reveal">
           <h2 data-i18n="booking_title">Запись через WhatsApp</h2>
@@ -203,7 +237,7 @@
       </div>
     </section>
 
-    <section class="section" id="education">
+    <section class="section section--gray" id="education">
       <div class="container">
         <header class="section__head reveal">
           <h2 data-i18n="edu_title">Медицинское образование</h2>
@@ -217,7 +251,7 @@
       </div>
     </section>
 
-    <section class="section section--gray" id="charity">
+    <section class="section" id="charity">
       <div class="container">
         <header class="section__head reveal">
           <h2 data-i18n="charity_title">Выездные клиники и благотворительность</h2>
@@ -231,6 +265,13 @@
         <div class="actions reveal">
           <a href="#" class="btn btn--secondary js-wa" data-i18n="charity_cta">Связаться с нами</a>
         </div>
+      </div>
+    </section>
+
+    <section class="section section--gray" id="faq">
+      <div class="container split">
+        <h2 class="reveal" data-i18n="faq_title">Частые вопросы</h2>
+        <div class="faq reveal" id="faqList"></div>
       </div>
     </section>
 
@@ -282,6 +323,7 @@
         <a href="#booking" data-i18n="nav_booking"></a>
         <a href="#education" data-i18n="nav_education"></a>
         <a href="#charity" data-i18n="nav_charity"></a>
+        <a href="#faq" data-i18n="nav_faq"></a>
         <a href="#contact" data-i18n="nav_contact"></a>
         <a href="#" class="js-portal" data-i18n="footer_portal"></a>
         <a href="https://www.instagram.com/mercymed.kg/" target="_blank" rel="noopener">Instagram</a>
@@ -290,6 +332,12 @@
     </div>
   </footer>
 
+  <div class="mobile-bar">
+    <a href="tel:+996770231813" class="btn btn--secondary" data-i18n="bar_call">Позвонить</a>
+    <a href="#" class="btn btn--primary js-wa">WhatsApp</a>
+  </div>
+
+  <script type="application/ld+json" id="faqLd"></script>
   <script src="js/i18n.js"></script>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
