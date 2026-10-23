@@ -1,57 +1,111 @@
-const ICONS = {
-  baby: '<circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/><path d="M10.5 8h.01M13.5 8h.01"/>',
-  home: '<path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M12 13v4M10 15h4"/>',
-  drop: '<path d="M12 3s7 7.5 7 12a7 7 0 0 1-14 0c0-4.5 7-12 7-12Z"/>',
-  wave: '<path d="M2 12c2 0 2-5 4-5s2 10 4 10 2-10 4-10 2 10 4 10 2-5 4-5"/>',
-  pulse: '<path d="M3 12h4l2-6 4 12 2-6h6"/>',
-  hand: '<path d="M7 11V6a1.5 1.5 0 0 1 3 0v5M10 10V4.5a1.5 1.5 0 0 1 3 0V10M13 10V5.5a1.5 1.5 0 0 1 3 0V12"/><path d="M16 9.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-12.6 4.2L4 15a1.5 1.5 0 0 1 2.3-2L7 14"/>',
-  heart: '<path d="M12 21s-8-4.8-8-10.4A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 8 2.6C20 16.2 12 21 12 21Z"/>',
-  chat: '<path d="M4 5h16v11H9l-5 4Z"/><path d="M8 10h8M8 13h5"/>',
-  lungs: '<path d="M12 4v8"/><path d="M12 12c-1.5 0-3-1-3-3"/><path d="M12 12c1.5 0 3-1 3-3"/><path d="M8.5 7C6 7 4 11 4 15.5 4 18 5.5 19 7 19c2 0 3-1.5 3-4V9.5"/><path d="M15.5 7C18 7 20 11 20 15.5c0 2.5-1.5 3.5-3 3.5-2 0-3-1.5-3-4V9.5"/>',
-  car: '<path d="M5 16V11l2-5h10l2 5v5"/><path d="M3 16h18v3H3z"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="16.5" cy="19" r="1.5"/>',
-};
+const LANGS = ["ru", "ky", "en"];
+const NUMBER_LOCALE = { ru: "ru-RU", ky: "ky-KG", en: "en-US" };
 
-const icon = (name) =>
-  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ""}</svg>`;
+let lang = detectLang();
+let fitNav = () => {};
 
-const initials = (name) => {
-  const parts = name.split(" ");
-  return parts[0][0] + parts[parts.length - 1][0];
-};
+function detectLang() {
+  const fromUrl = new URLSearchParams(location.search).get("lang");
+  if (LANGS.includes(fromUrl)) return fromUrl;
+  try {
+    const saved = localStorage.getItem("lang");
+    if (LANGS.includes(saved)) return saved;
+  } catch {}
+  const browser = (navigator.language || "").slice(0, 2);
+  return LANGS.includes(browser) ? browser : "ru";
+}
 
-function render() {
-  document.getElementById("servicesGrid").innerHTML = SERVICES.map((s) => `
-    <article class="service">
-      <div class="service__icon">${icon(s.icon)}</div>
-      <h3>${s.title}</h3>
-      <p>${s.text}</p>
-    </article>`).join("");
+const t = (key) => I18N[lang][key] ?? I18N.ru[key] ?? "";
+const num = (n) => n.toLocaleString(NUMBER_LOCALE[lang]);
+const plural = (n, word) => PLURAL[lang](n, WORDS[word][lang]);
+const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  document.getElementById("plansGrid").innerHTML = PLANS.map((p) => `
-    <article class="plan${p.featured ? " plan--featured" : ""}">
-      ${p.featured ? '<span class="plan__badge">Most chosen</span>' : ""}
-      <h3>${p.name}</h3>
-      <p>${p.text}</p>
-      <a href="#contact" class="btn ${p.featured ? "btn--primary" : "btn--ghost"} btn--block">Ask about this plan</a>
-    </article>`).join("");
+const PERSON_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>';
 
-  document.getElementById("teamGrid").innerHTML = DOCTORS.map((d) => `
-    <article class="doctor">
-      <div class="doctor__photo">${d.photo ? `<img src="${d.photo}" alt="${d.name}" loading="lazy">` : `<span>${initials(d.name)}</span>`}</div>
-      <div class="doctor__body">
-        <h3>${d.name}</h3>
-        <p class="doctor__role">${d.role}</p>
-        ${d.years ? `<p class="doctor__exp">${d.years} years of experience</p>` : ""}
-        <div class="doctor__tags">${d.tags.map((t) => `<span>${t}</span>`).join("")}</div>
-      </div>
-    </article>`).join("");
+function renderServices() {
+  document.getElementById("servicesList").innerHTML = SERVICES.map((s) => {
+    const [title, text] = s[lang];
+    return `<li class="list__item reveal"><h3>${title}</h3><p>${text}</p></li>`;
+  }).join("");
+}
 
-  document.getElementById("instaGrid").innerHTML = INSTAGRAM.map((p) => `
-    <a href="${p.url}" target="_blank" rel="noopener" class="insta__item" aria-label="${p.alt}">
-      ${p.image ? `<img src="${p.image}" alt="${p.alt}" loading="lazy">` : ""}
-    </a>`).join("");
+function renderPlans() {
+  document.getElementById("plansList").innerHTML = PLANS.map((p) => {
+    const [title, text] = p[lang];
+    return `<article class="column reveal"><h3>${title}</h3><p>${text}</p></article>`;
+  }).join("");
+}
 
-  document.getElementById("year").textContent = new Date().getFullYear();
+function renderTeam() {
+  document.getElementById("teamList").innerHTML = DOCTORS.map((d) => {
+    const name = d.name[lang];
+    const photo = d.photo
+      ? `<img src="${d.photo}" alt="${name}" width="200" height="200" loading="lazy" decoding="async" onerror="this.replaceWith(document.createRange().createContextualFragment(PERSON_SVG))">`
+      : PERSON_SVG;
+    const meta = [];
+    if (d.years) meta.push(`${WORDS.experience[lang]} ${d.years} ${plural(d.years, "years")}`);
+    if (d.rating) meta.push(`★ ${num(d.rating)} · ${d.reviews} ${plural(d.reviews, "reviews")}`);
+    return `
+      <li class="doctor reveal">
+        <div class="doctor__photo">${photo}</div>
+        <h3>${name}</h3>
+        <p class="doctor__role">${d.role[lang]}</p>
+        ${meta.length ? `<p class="doctor__meta">${meta.join("<br>")}</p>` : ""}
+      </li>`;
+  }).join("");
+}
+
+function applyLang(next, { animate = false } = {}) {
+  const run = () => {
+    lang = next;
+    document.documentElement.lang = lang;
+    document.title = t("meta_title");
+    document.querySelector('meta[name="description"]').content = t("meta_desc");
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      el.textContent = t(el.dataset.i18n);
+    });
+    document.querySelectorAll("[data-i18n-attr]").forEach((el) => {
+      const [attr, key] = el.dataset.i18nAttr.split(":");
+      el.setAttribute(attr, t(key));
+    });
+    document.querySelectorAll("[data-lang]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+
+    renderServices();
+    renderPlans();
+    renderTeam();
+    observeReveal(document.querySelectorAll(".reveal:not(.is-visible)"));
+    fitNav();
+
+    try { localStorage.setItem("lang", lang); } catch {}
+    const url = new URL(location.href);
+    url.searchParams.set("lang", lang);
+    history.replaceState(null, "", url);
+  };
+
+  if (!animate || reducedMotion()) return run();
+  document.body.classList.add("is-switching");
+  setTimeout(() => {
+    run();
+    document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible", "no-delay"));
+    document.body.classList.remove("is-switching");
+  }, 200);
+}
+
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add("is-visible");
+    revealObserver.unobserve(entry.target);
+  });
+}, { rootMargin: "0px 0px -8% 0px" });
+
+function observeReveal(elements) {
+  elements.forEach((el) => {
+    const siblings = [...el.parentElement.children].filter((c) => c.classList.contains("reveal"));
+    el.style.setProperty("--i", Math.min(siblings.indexOf(el), 6));
+    revealObserver.observe(el);
+  });
 }
 
 function formatDate(iso) {
@@ -67,53 +121,72 @@ function setupBooking() {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form));
     const missing = ["firstName", "lastName", "dob", "phone"].filter((k) => !data[k].trim());
+    const phoneOk = /^\+?[\d\s()-]{9,}$/.test(data.phone.trim());
 
-    form.querySelectorAll("[required]").forEach((el) => el.classList.toggle("is-invalid", missing.includes(el.name)));
-    if (missing.length) {
-      error.textContent = "Please fill in your name, surname, date of birth and mobile number.";
-      return;
-    }
-    if (!/^\+?[\d\s()-]{9,}$/.test(data.phone)) {
-      error.textContent = "Please enter a valid mobile number.";
-      form.phone.classList.add("is-invalid");
+    form.querySelectorAll("input").forEach((input) => {
+      const bad = missing.includes(input.name) || (input.name === "phone" && !missing.length && !phoneOk);
+      input.setAttribute("aria-invalid", bad);
+    });
+
+    if (missing.length || !phoneOk) {
+      error.textContent = missing.length ? t("f_err_required") : t("f_err_phone");
       return;
     }
     error.textContent = "";
 
-    const lines = [
-      "Hello MercyMed! I would like to book an appointment.",
+    const message = [
+      t("wa_hello"),
       "",
-      `Name: ${data.firstName.trim()}`,
-      `Surname: ${data.lastName.trim()}`,
-      `Date of birth: ${formatDate(data.dob)}`,
-      `Mobile: ${data.phone.trim()}`,
-    ];
+      `${t("wa_first")}: ${data.firstName.trim()}`,
+      `${t("wa_last")}: ${data.lastName.trim()}`,
+      `${t("wa_dob")}: ${formatDate(data.dob)}`,
+      `${t("wa_phone")}: ${data.phone.trim()}`,
+    ].join("\n");
 
-    window.open(`https://wa.me/${CLINIC.whatsapp}?text=${encodeURIComponent(lines.join("\n"))}`, "_blank", "noopener");
+    window.open(`https://wa.me/${CLINIC.whatsapp}?text=${encodeURIComponent(message)}`, "_blank", "noopener");
   });
 }
 
-function setupNav() {
+function setupHeader() {
   const burger = document.getElementById("burger");
   const nav = document.getElementById("nav");
-  const toggle = (open) => {
+
+  const setMenu = (open) => {
     document.body.classList.toggle("nav-open", open);
     burger.setAttribute("aria-expanded", open);
+    burger.setAttribute("aria-label", t(open ? "menu_close" : "menu_open"));
   };
-  burger.addEventListener("click", () => toggle(!document.body.classList.contains("nav-open")));
-  nav.addEventListener("click", (e) => e.target.tagName === "A" && toggle(false));
+  burger.addEventListener("click", () => setMenu(!document.body.classList.contains("nav-open")));
+  nav.addEventListener("click", (e) => e.target.closest("a") && setMenu(false));
+  addEventListener("keydown", (e) => e.key === "Escape" && setMenu(false));
 
   const header = document.querySelector(".header");
-  addEventListener("scroll", () => header.classList.toggle("is-scrolled", scrollY > 10), { passive: true });
+  const onScroll = () => header.classList.toggle("is-scrolled", scrollY > 8);
+  addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 
   const links = [...nav.querySelectorAll("a")];
-  const observer = new IntersectionObserver((entries) => {
+  const spy = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      links.forEach((a) => a.classList.toggle("is-active", a.hash === `#${entry.target.id}`));
+      if (entry.isIntersecting) links.forEach((a) => a.classList.toggle("is-active", a.hash === `#${entry.target.id}`));
     });
-  }, { rootMargin: "-45% 0px -50% 0px" });
-  document.querySelectorAll("main section[id]").forEach((s) => observer.observe(s));
+  }, { rootMargin: "-40% 0px -55% 0px" });
+  document.querySelectorAll("main section[id]").forEach((s) => spy.observe(s));
+
+  const bar = document.querySelector(".header__bar");
+  const fit = () => {
+    header.classList.remove("is-compact");
+    header.classList.toggle("is-compact", innerWidth < 900 || bar.scrollWidth > bar.clientWidth + 1);
+    if (!header.classList.contains("is-compact")) setMenu(false);
+  };
+  addEventListener("resize", fit);
+  document.fonts?.ready.then(fit);
+  fitNav = fit;
+  fit();
+
+  document.querySelectorAll("[data-lang]").forEach((b) => {
+    b.addEventListener("click", () => b.dataset.lang !== lang && applyLang(b.dataset.lang, { animate: true }));
+  });
 
   document.querySelectorAll(".js-wa").forEach((a) => {
     a.href = `https://wa.me/${CLINIC.whatsapp}`;
@@ -121,23 +194,26 @@ function setupNav() {
     a.rel = "noopener";
   });
   document.querySelectorAll(".js-portal").forEach((a) => (a.href = CLINIC.portalUrl));
+  document.getElementById("year").textContent = new Date().getFullYear();
 }
 
-function setupReveal() {
-  const items = document.querySelectorAll(".section__head, .service, .plan, .doctor, .card, .intl__list li, .about > *, .booking > *, .charity > *, .contact > *");
-  items.forEach((el) => el.classList.add("reveal"));
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((e) => {
-      if (e.isIntersecting) {
-        e.target.classList.add("is-visible");
-        io.unobserve(e.target);
-      }
+function setupParallax() {
+  if (reducedMotion()) return;
+  const layers = document.querySelectorAll(".hero__art .layer");
+  let ticking = false;
+  addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = Math.min(scrollY, 900);
+      layers.forEach((l, i) => l.style.setProperty("--py", `${(-y * i * 0.015).toFixed(2)}px`));
+      ticking = false;
     });
-  }, { threshold: 0.12 });
-  items.forEach((el) => io.observe(el));
+  }, { passive: true });
 }
 
-render();
+applyLang(lang);
 setupBooking();
-setupNav();
-setupReveal();
+setupHeader();
+setupParallax();
+requestAnimationFrame(() => document.body.classList.add("is-loaded"));

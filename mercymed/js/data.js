@@ -1,43 +1,128 @@
 const CLINIC = {
-  name: "MercyMed",
   phone: "+996 770 231 813",
-  phoneRaw: "996770231813",
   whatsapp: "996770231813",
   email: "medicalcenter@mercymed.kg",
   instagram: "mercymed.kg",
-  address: "Isakeeva St. 18/15, block 3, Ala-Too residential complex, Bishkek",
-  mapQuery: "MercyMed Isakeeva 18 Bishkek",
+  gis: "https://2gis.kg/bishkek/firm/70000001080819179",
   portalUrl: "#",
 };
 
 const SERVICES = [
-  { icon: "baby", title: "General Pediatrics", text: "Check-ups, vaccinations and sick visits for newborns to teens, with pediatricians trained in the USA and Kyrgyzstan." },
-  { icon: "home", title: "Family Medicine", text: "One clinic for the whole family: adult therapy, chronic conditions, referrals and preventive care." },
-  { icon: "drop", title: "Pediatric Oncology & Hematology", text: "Consultations with a pediatric hematologist-oncologist for children with blood disorders and cancer, coordinated with specialised hospitals." },
-  { icon: "lungs", title: "Pulmonology", text: "Diagnosis and treatment of asthma, bronchitis and other lung conditions in adults." },
-  { icon: "wave", title: "Ultrasound Diagnostics", text: "Ultrasound of internal organs for children and adults, with results explained on the same day." },
-  { icon: "pulse", title: "ECG & Laboratory", text: "Electrocardiography and lab tests on site (lab open Mon–Fri 08:00–12:00), so you get answers without going to several places." },
-  { icon: "hand", title: "Physical Therapy", text: "Rehabilitation and physiotherapy for children and adults, led by a highest-category specialist." },
-  { icon: "heart", title: "Women's Health & Doula", text: "Obstetrics-gynecology consultations and doula support before, during and after birth." },
-  { icon: "chat", title: "Psychology", text: "Support for children, parents and families from a psychologist who works alongside our doctors." },
-  { icon: "car", title: "Home Visits", text: "A doctor comes to you when your child is too unwell to travel." },
-];
-
-const DOCTORS = [
-  { name: "Lukas Rafael Meier-Landolt", role: "Pediatric Hematologist, Oncologist & Pediatrician", years: 12, tags: ["Hematology", "Oncology", "Pediatrics"], photo: "" },
-  { name: "Nancy Yau", role: "Pediatrician (USA)", years: 17, tags: ["Pediatrics", "English"], photo: "" },
-  { name: "Jonathan Williams", role: "Pediatrician", years: null, tags: ["Pediatrics"], photo: "" },
-  { name: "Irina Pak", role: "Pediatrician & Therapist", years: 16, tags: ["Pediatrics", "Adults"], photo: "" },
-  { name: "Nasyikat Dononbaeva", role: "Pulmonologist & Therapist, highest category", years: 13, tags: ["Pulmonology", "Adults"], photo: "" },
-  { name: "Symbat Sadyrbaeva", role: "Obstetrician-Gynecologist", years: 6, tags: ["Women's health"], photo: "" },
-  { name: "Makhabat Alieva", role: "Physiotherapist", years: 24, tags: ["Rehabilitation"], photo: "" },
-  { name: "Nabat Gasymova", role: "Pediatric Anesthesiologist & Pediatrician", years: 4, tags: ["Pediatrics", "Intensive care"], photo: "" },
+  {
+    ru: ["Педиатрия", "Осмотры, прививки и лечение детей от рождения до 18 лет."],
+    ky: ["Педиатрия", "Төрөлгөндөн 18 жашка чейинки балдарды кароо, эмдөө жана дарылоо."],
+    en: ["Pediatrics", "Check-ups, vaccinations and treatment for children from birth to 18."],
+  },
+  {
+    ru: ["Семейная медицина", "Терапевт для взрослых, хронические заболевания и профилактика."],
+    ky: ["Үй-бүлөлүк медицина", "Чоңдор үчүн терапевт, өнөкөт оорулар жана алдын алуу."],
+    en: ["Family medicine", "Adult therapy, chronic conditions and preventive care."],
+  },
+  {
+    ru: ["Детская гематология и онкология", "Консультации детского гематолога-онколога, сопровождение вместе со специализированными больницами."],
+    ky: ["Балдар гематологиясы жана онкологиясы", "Балдар гематолог-онкологунун консультациясы, адистештирилген ооруканалар менен бирге көзөмөл."],
+    en: ["Pediatric hematology & oncology", "Consultations with a pediatric hematologist-oncologist, coordinated with specialised hospitals."],
+  },
+  {
+    ru: ["Пульмонология", "Диагностика и лечение астмы, бронхита и других болезней лёгких."],
+    ky: ["Пульмонология", "Астма, бронхит жана өпкөнүн башка ооруларын аныктоо жана дарылоо."],
+    en: ["Pulmonology", "Diagnosis and treatment of asthma, bronchitis and other lung conditions."],
+  },
+  {
+    ru: ["Акушерство и гинекология", "Ведение беременности, гинекологические консультации и поддержка доулы."],
+    ky: ["Акушердик жана гинекология", "Кош бойлуулукту көзөмөлдөө, гинеколог консультациясы жана доуланын колдоосу."],
+    en: ["Obstetrics & gynecology", "Pregnancy care, gynecology consultations and doula support."],
+  },
+  {
+    ru: ["Физиотерапия", "Реабилитация для детей и взрослых."],
+    ky: ["Физиотерапия", "Балдар жана чоңдор үчүн реабилитация."],
+    en: ["Physiotherapy", "Rehabilitation for children and adults."],
+  },
+  {
+    ru: ["УЗИ и ЭКГ", "Ультразвуковое исследование органов и электрокардиография на месте."],
+    ky: ["УЗИ жана ЭКГ", "Органдарды ультраүн менен изилдөө жана электрокардиография ушул жерде."],
+    en: ["Ultrasound & ECG", "Ultrasound of internal organs and electrocardiography on site."],
+  },
+  {
+    ru: ["Лаборатория", "Анализы с понедельника по пятницу, 08:00–12:00."],
+    ky: ["Лаборатория", "Анализдер дүйшөмбүдөн жумага чейин, 08:00–12:00."],
+    en: ["Laboratory", "Lab tests Monday to Friday, 08:00–12:00."],
+  },
+  {
+    ru: ["Психолог", "Поддержка детей, родителей и всей семьи."],
+    ky: ["Психолог", "Балдарга, ата-энелерге жана бүт үй-бүлөгө колдоо."],
+    en: ["Psychology", "Support for children, parents and the whole family."],
+  },
+  {
+    ru: ["Выезд на дом", "Врач приедет, если ребёнку тяжело выйти из дома."],
+    ky: ["Үйгө чакыруу", "Бала үйдөн чыга албаса, дарыгер өзү келет."],
+    en: ["Home visits", "A doctor comes to you when your child is too unwell to travel."],
+  },
 ];
 
 const PLANS = [
-  { name: "Individual", text: "Year-round care for one person: scheduled check-ups, priority booking and a doctor who knows your history." },
-  { name: "Family", text: "One plan for parents and children, covering pediatric visits, family medicine and home visits.", featured: true },
-  { name: "Corporate", text: "Plans for companies and their employees' families: pre-employment check-ups, annual screenings and one invoice." },
+  {
+    ru: ["Индивидуальная", "Плановые осмотры в течение года, приоритетная запись и врач, который знает вашу историю."],
+    ky: ["Жеке", "Жыл бою пландуу текшерүүлөр, артыкчылыктуу жазылуу жана тарыхыңызды билген дарыгер."],
+    en: ["Individual", "Scheduled check-ups through the year, priority booking and a doctor who knows your history."],
+  },
+  {
+    ru: ["Семейная", "Одна программа для родителей и детей: педиатр, семейный врач и выезды на дом."],
+    ky: ["Үй-бүлөлүк", "Ата-эне жана балдар үчүн бир программа: педиатр, үй-бүлөлүк дарыгер жана үйгө чакыруу."],
+    en: ["Family", "One plan for parents and children: pediatrician, family doctor and home visits."],
+  },
+  {
+    ru: ["Корпоративная", "Для компаний: медосмотры при приёме на работу, ежегодные обследования и один счёт."],
+    ky: ["Корпоративдик", "Компаниялар үчүн: жумушка кабыл алуудагы медкароо, жыл сайын текшерүү жана бир эсеп."],
+    en: ["Corporate", "For companies: pre-employment check-ups, annual screenings and one invoice."],
+  },
 ];
 
-const INSTAGRAM = Array.from({ length: 6 }, (_, i) => ({ url: `https://instagram.com/${CLINIC.instagram}`, image: "", alt: `MercyMed Instagram post ${i + 1}` }));
+const ODOCTOR_IMG = "https://thumbor.odoctor.kg/";
+
+const DOCTORS = [
+  {
+    name: { ru: "Лукас Рафаэль Мейер-Ландольт", ky: "Лукас Рафаэль Мейер-Ландольт", en: "Lukas Rafael Meier-Landolt" },
+    role: { ru: "Детский гематолог-онколог, педиатр", ky: "Балдар гематолог-онкологу, педиатр", en: "Pediatric hematologist-oncologist, pediatrician" },
+    years: 12,
+    photo: ODOCTOR_IMG + "vW1aaKoFf8z9B_6mfEo_KqBW1zo=/200x200/smart/filters:ffr()/media/doctors/lukas-rafael-1784532631.png?_v=2",
+  },
+  {
+    name: { ru: "Нэнси Яу", ky: "Нэнси Яу", en: "Nancy Yau" },
+    role: { ru: "Педиатр", ky: "Педиатр", en: "Pediatrician" },
+    years: 17,
+    photo: ODOCTOR_IMG + "yQgNvFSPjPJsFBAbQt2S3k5BHi0=/200x200/smart/filters:ffr()/media/doctors/nensi-yau.webp?_v=2",
+  },
+  {
+    name: { ru: "Джонатан Уильямс", ky: "Джонатан Уильямс", en: "Jonathan Williams" },
+    role: { ru: "Педиатр", ky: "Педиатр", en: "Pediatrician" },
+    rating: 10, reviews: 6,
+    photo: ODOCTOR_IMG + "bBwAbhdglcFjRfB5RqBif0Q3k-s=/200x200/smart/filters:ffr()/media/doctors/jonathan-williams.webp?_v=2",
+  },
+  {
+    name: { ru: "Ирина Пак", ky: "Ирина Пак", en: "Irina Pak" },
+    role: { ru: "Педиатр, терапевт", ky: "Педиатр, терапевт", en: "Pediatrician, therapist" },
+    years: 16, rating: 9.5, reviews: 24,
+    photo: ODOCTOR_IMG + "3gPmo7ZixAhNnhV7GQleNSMcUh0=/200x200/smart/filters:ffr()/media/doctors/pak-irina.webp?_v=2",
+  },
+  {
+    name: { ru: "Насыйкат Дононбаева", ky: "Насыйкат Дононбаева", en: "Nasyikat Dononbaeva" },
+    role: { ru: "Пульмонолог, терапевт, высшая категория", ky: "Пульмонолог, терапевт, жогорку категория", en: "Pulmonologist, therapist, highest category" },
+    years: 13, rating: 9.5, reviews: 2,
+  },
+  {
+    name: { ru: "Сымбат Садырбаева", ky: "Сымбат Садырбаева", en: "Symbat Sadyrbaeva" },
+    role: { ru: "Акушер-гинеколог", ky: "Акушер-гинеколог", en: "Obstetrician-gynecologist" },
+    years: 6, rating: 9, reviews: 2,
+  },
+  {
+    name: { ru: "Махабат Алиева", ky: "Махабат Алиева", en: "Makhabat Alieva" },
+    role: { ru: "Физиотерапевт", ky: "Физиотерапевт", en: "Physiotherapist" },
+    years: 24, rating: 10, reviews: 1,
+  },
+  {
+    name: { ru: "Набат Гасымова", ky: "Набат Гасымова", en: "Nabat Gasymova" },
+    role: { ru: "Детский анестезиолог-реаниматолог, педиатр", ky: "Балдар анестезиолог-реаниматологу, педиатр", en: "Pediatric anesthesiologist, pediatrician" },
+    years: 4, rating: 10, reviews: 1,
+  },
+];
