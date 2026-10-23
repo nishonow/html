@@ -21,19 +21,20 @@ const plural = (n, word) => PLURAL[lang](n, WORDS[word][lang]);
 const waLink = (text) => `https://wa.me/${CLINIC.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
 const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+const icon = (name) => `<svg class="icon" aria-hidden="true"><use href="#i-${name}"/></svg>`;
 const PERSON_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>';
 
 function renderServices() {
   document.getElementById("servicesList").innerHTML = SERVICES.map((s) => {
     const [title, text] = s[lang];
-    return `<li class="list__item reveal"><h3>${title}</h3><p>${text}</p></li>`;
+    return `<li class="list__item reveal">${icon(s.icon)}<h3>${title}</h3><p>${text}</p></li>`;
   }).join("");
 }
 
 function renderPlans() {
   document.getElementById("plansList").innerHTML = PLANS.map((p) => {
     const [title, text] = p[lang];
-    return `<article class="column reveal"><h3>${title}</h3><p>${text}</p></article>`;
+    return `<article class="column reveal">${icon(p.icon)}<h3>${title}</h3><p>${text}</p></article>`;
   }).join("");
 }
 
@@ -45,14 +46,16 @@ function renderTeam() {
       : PERSON_SVG;
     const meta = [];
     if (d.years) meta.push(`${WORDS.experience[lang]} ${d.years} ${plural(d.years, "years")}`);
-    if (d.rating) meta.push(`★ ${num(d.rating)} · ${d.reviews} ${plural(d.reviews, "reviews")}`);
+    meta.push(d.rating ? `★ ${num(d.rating)} · ${d.reviews} ${plural(d.reviews, "reviews")}` : t("team_new"));
     return `
       <li class="doctor reveal">
         <div class="doctor__photo">${photo}</div>
         <h3>${name}</h3>
         <p class="doctor__role">${d.role[lang]}</p>
-        ${meta.length ? `<p class="doctor__meta">${meta.join("<br>")}</p>` : ""}
-        <a class="doctor__book" href="${waLink(t("wa_doctor").replace("{name}", name))}" target="_blank" rel="noopener">${t("doc_book")} <span class="arrow" aria-hidden="true">→</span></a>
+        <div class="doctor__foot">
+          <p class="doctor__meta">${meta.join("<br>")}</p>
+          <a class="doctor__book" href="${waLink(t("wa_doctor").replace("{name}", name))}" target="_blank" rel="noopener">${t("doc_book")} <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
       </li>`;
   }).join("");
 }
@@ -74,9 +77,18 @@ function renderFaq() {
 }
 
 function renderPhotos() {
+  const media = document.querySelector(".hero__media");
   if (PHOTOS.hero) {
-    document.querySelector(".hero__art").innerHTML = `<img src="${PHOTOS.hero}" alt="MercyMed" fetchpriority="high">`;
-    document.querySelector(".hero__art").classList.add("hero__art--photo");
+    media.innerHTML = `<div class="hero__art hero__art--photo"><img src="${PHOTOS.hero}" alt="MercyMed" fetchpriority="high"></div>`;
+  } else {
+    const withPhoto = DOCTORS.filter((d) => d.photo).slice(0, 4);
+    if (withPhoto.length === 4) {
+      media.classList.add("has-doctors");
+      document.getElementById("heroDoctors").innerHTML = withPhoto
+        .map((d, i) => `<li style="--d:${i}"><img src="${d.photo}" alt="" width="200" height="200" fetchpriority="high"></li>`).join("");
+      media.querySelectorAll(".hero__doctors img").forEach((img) =>
+        img.addEventListener("error", () => media.classList.remove("has-doctors"), { once: true }));
+    }
   }
   if (PHOTOS.gallery.length) {
     document.getElementById("gallery").hidden = false;

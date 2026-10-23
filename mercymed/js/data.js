@@ -14,51 +14,61 @@ const PHOTOS = {
 
 const SERVICES = [
   {
+    icon: "baby",
     ru: ["Педиатрия", "Осмотры, прививки и лечение детей от рождения до 18 лет."],
     ky: ["Педиатрия", "Төрөлгөндөн 18 жашка чейинки балдарды кароо, эмдөө жана дарылоо."],
     en: ["Pediatrics", "Check-ups, vaccinations and treatment for children from birth to 18."],
   },
   {
+    icon: "users",
     ru: ["Семейная медицина", "Терапевт для взрослых, хронические заболевания и профилактика."],
     ky: ["Үй-бүлөлүк медицина", "Чоңдор үчүн терапевт, өнөкөт оорулар жана алдын алуу."],
     en: ["Family medicine", "Adult therapy, chronic conditions and preventive care."],
   },
   {
+    icon: "drop",
     ru: ["Детская гематология и онкология", "Консультации детского гематолога-онколога, сопровождение вместе со специализированными больницами."],
     ky: ["Балдар гематологиясы жана онкологиясы", "Балдар гематолог-онкологунун консультациясы, адистештирилген ооруканалар менен бирге көзөмөл."],
     en: ["Pediatric hematology & oncology", "Consultations with a pediatric hematologist-oncologist, coordinated with specialised hospitals."],
   },
   {
+    icon: "lungs",
     ru: ["Пульмонология", "Диагностика и лечение астмы, бронхита и других болезней лёгких."],
     ky: ["Пульмонология", "Астма, бронхит жана өпкөнүн башка ооруларын аныктоо жана дарылоо."],
     en: ["Pulmonology", "Diagnosis and treatment of asthma, bronchitis and other lung conditions."],
   },
   {
+    icon: "heart",
     ru: ["Акушерство и гинекология", "Ведение беременности, гинекологические консультации и поддержка доулы."],
     ky: ["Акушердик жана гинекология", "Кош бойлуулукту көзөмөлдөө, гинеколог консультациясы жана доуланын колдоосу."],
     en: ["Obstetrics & gynecology", "Pregnancy care, gynecology consultations and doula support."],
   },
   {
+    icon: "person",
     ru: ["Физиотерапия", "Реабилитация для детей и взрослых."],
     ky: ["Физиотерапия", "Балдар жана чоңдор үчүн реабилитация."],
     en: ["Physiotherapy", "Rehabilitation for children and adults."],
   },
   {
+    icon: "pulse",
     ru: ["УЗИ и ЭКГ", "Ультразвуковое исследование органов и электрокардиография на месте."],
     ky: ["УЗИ жана ЭКГ", "Органдарды ультраүн менен изилдөө жана электрокардиография ушул жерде."],
     en: ["Ultrasound & ECG", "Ultrasound of internal organs and electrocardiography on site."],
   },
   {
+    icon: "flask",
     ru: ["Лаборатория", "Анализы с понедельника по пятницу, 08:00–12:00."],
     ky: ["Лаборатория", "Анализдер дүйшөмбүдөн жумага чейин, 08:00–12:00."],
     en: ["Laboratory", "Lab tests Monday to Friday, 08:00–12:00."],
   },
   {
+    icon: "chat",
     ru: ["Психолог", "Поддержка детей, родителей и всей семьи."],
     ky: ["Психолог", "Балдарга, ата-энелерге жана бүт үй-бүлөгө колдоо."],
     en: ["Psychology", "Support for children, parents and the whole family."],
   },
   {
+    icon: "home",
     ru: ["Выезд на дом", "Врач приедет, если ребёнку тяжело выйти из дома."],
     ky: ["Үйгө чакыруу", "Бала үйдөн чыга албаса, дарыгер өзү келет."],
     en: ["Home visits", "A doctor comes to you when your child is too unwell to travel."],
@@ -67,16 +77,19 @@ const SERVICES = [
 
 const PLANS = [
   {
+    icon: "user",
     ru: ["Индивидуальная", "Плановые осмотры в течение года, приоритетная запись и врач, который знает вашу историю."],
     ky: ["Жеке", "Жыл бою пландуу текшерүүлөр, артыкчылыктуу жазылуу жана тарыхыңызды билген дарыгер."],
     en: ["Individual", "Scheduled check-ups through the year, priority booking and a doctor who knows your history."],
   },
   {
+    icon: "users",
     ru: ["Семейная", "Одна программа для родителей и детей: педиатр, семейный врач и выезды на дом."],
     ky: ["Үй-бүлөлүк", "Ата-эне жана балдар үчүн бир программа: педиатр, үй-бүлөлүк дарыгер жана үйгө чакыруу."],
     en: ["Family", "One plan for parents and children: pediatrician, family doctor and home visits."],
   },
   {
+    icon: "building",
     ru: ["Корпоративная", "Для компаний: медосмотры при приёме на работу, ежегодные обследования и один счёт."],
     ky: ["Корпоративдик", "Компаниялар үчүн: жумушка кабыл алуудагы медкароо, жыл сайын текшерүү жана бир эсеп."],
     en: ["Corporate", "For companies: pre-employment check-ups, annual screenings and one invoice."],
