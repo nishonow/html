@@ -13,8 +13,8 @@ const CLINIC = {
 const SERVICES = [
   { icon: "baby", title: "General Pediatrics", text: "Check-ups, vaccinations and sick visits for newborns to teens, with pediatricians trained in the USA and Kyrgyzstan." },
   { icon: "home", title: "Family Medicine", text: "One clinic for the whole family: adult therapy, chronic conditions, referrals and preventive care." },
-  { icon: "brain", title: "Pediatric Neurology & Epileptology", text: "Diagnosis and long-term follow-up of seizures, developmental delays and other neurological conditions in children." },
-  { icon: "drop", title: "Pediatric Oncology & Hematology", text: "Consultations and supportive care for children with blood disorders and cancer, coordinated with specialised hospitals." },
+  { icon: "drop", title: "Pediatric Oncology & Hematology", text: "Consultations with a pediatric hematologist-oncologist for children with blood disorders and cancer, coordinated with specialised hospitals." },
+  { icon: "lungs", title: "Pulmonology", text: "Diagnosis and treatment of asthma, bronchitis and other lung conditions in adults." },
   { icon: "wave", title: "Ultrasound Diagnostics", text: "Ultrasound of internal organs for children and adults, with results explained on the same day." },
   { icon: "pulse", title: "ECG & Laboratory", text: "Electrocardiography and lab tests on site (lab open Mon–Fri 08:00–12:00), so you get answers without going to several places." },
   { icon: "hand", title: "Physical Therapy", text: "Rehabilitation and physiotherapy for children and adults, led by a highest-category specialist." },
@@ -24,12 +24,13 @@ const SERVICES = [
 ];
 
 const DOCTORS = [
+  { name: "Lukas Rafael Meier-Landolt", role: "Pediatric Hematologist, Oncologist & Pediatrician", years: 12, tags: ["Hematology", "Oncology", "Pediatrics"], photo: "" },
   { name: "Nancy Yau", role: "Pediatrician (USA)", years: 17, tags: ["Pediatrics", "English"], photo: "" },
   { name: "Jonathan Williams", role: "Pediatrician", years: null, tags: ["Pediatrics"], photo: "" },
   { name: "Irina Pak", role: "Pediatrician & Therapist", years: 16, tags: ["Pediatrics", "Adults"], photo: "" },
-  { name: "Aiza Upaeva", role: "Pediatric Neurologist, Epileptologist", years: 10, tags: ["Neurology", "Epilepsy"], photo: "" },
-  { name: "Makhabat Alieva", role: "Physiotherapist, highest category", years: 24, tags: ["Rehabilitation"], photo: "" },
-  { name: "Sanzharbek Zheenbekov", role: "Ultrasound Doctor", years: 7, tags: ["Ultrasound"], photo: "" },
+  { name: "Nasyikat Dononbaeva", role: "Pulmonologist & Therapist, highest category", years: 13, tags: ["Pulmonology", "Adults"], photo: "" },
+  { name: "Symbat Sadyrbaeva", role: "Obstetrician-Gynecologist", years: 6, tags: ["Women's health"], photo: "" },
+  { name: "Makhabat Alieva", role: "Physiotherapist", years: 24, tags: ["Rehabilitation"], photo: "" },
   { name: "Nabat Gasymova", role: "Pediatric Anesthesiologist & Pediatrician", years: 4, tags: ["Pediatrics", "Intensive care"], photo: "" },
 ];
 

@@ -1,20 +1,23 @@
 const ICONS = {
   baby: '<circle cx="12" cy="8" r="4"/><path d="M5 21a7 7 0 0 1 14 0"/><path d="M10.5 8h.01M13.5 8h.01"/>',
   home: '<path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M12 13v4M10 15h4"/>',
-  brain: '<path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 6 1V5a2 2 0 0 0-3-1Z"/><path d="M15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-6 1"/>',
   drop: '<path d="M12 3s7 7.5 7 12a7 7 0 0 1-14 0c0-4.5 7-12 7-12Z"/>',
   wave: '<path d="M2 12c2 0 2-5 4-5s2 10 4 10 2-10 4-10 2 10 4 10 2-5 4-5"/>',
   pulse: '<path d="M3 12h4l2-6 4 12 2-6h6"/>',
   hand: '<path d="M7 11V6a1.5 1.5 0 0 1 3 0v5M10 10V4.5a1.5 1.5 0 0 1 3 0V10M13 10V5.5a1.5 1.5 0 0 1 3 0V12"/><path d="M16 9.5a1.5 1.5 0 0 1 3 0V14a7 7 0 0 1-12.6 4.2L4 15a1.5 1.5 0 0 1 2.3-2L7 14"/>',
   heart: '<path d="M12 21s-8-4.8-8-10.4A4.5 4.5 0 0 1 12 8a4.5 4.5 0 0 1 8 2.6C20 16.2 12 21 12 21Z"/>',
   chat: '<path d="M4 5h16v11H9l-5 4Z"/><path d="M8 10h8M8 13h5"/>',
+  lungs: '<path d="M12 4v8"/><path d="M12 12c-1.5 0-3-1-3-3"/><path d="M12 12c1.5 0 3-1 3-3"/><path d="M8.5 7C6 7 4 11 4 15.5 4 18 5.5 19 7 19c2 0 3-1.5 3-4V9.5"/><path d="M15.5 7C18 7 20 11 20 15.5c0 2.5-1.5 3.5-3 3.5-2 0-3-1.5-3-4V9.5"/>',
   car: '<path d="M5 16V11l2-5h10l2 5v5"/><path d="M3 16h18v3H3z"/><circle cx="7.5" cy="19" r="1.5"/><circle cx="16.5" cy="19" r="1.5"/>',
 };
 
 const icon = (name) =>
   `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[name] || ""}</svg>`;
 
-const initials = (name) => name.split(" ").map((p) => p[0]).slice(0, 2).join("");
+const initials = (name) => {
+  const parts = name.split(" ");
+  return parts[0][0] + parts[parts.length - 1][0];
+};
 
 function render() {
   document.getElementById("servicesGrid").innerHTML = SERVICES.map((s) => `
