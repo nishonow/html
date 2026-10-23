@@ -197,23 +197,7 @@ function setupHeader() {
   document.getElementById("year").textContent = new Date().getFullYear();
 }
 
-function setupParallax() {
-  if (reducedMotion()) return;
-  const layers = document.querySelectorAll(".hero__art .layer");
-  let ticking = false;
-  addEventListener("scroll", () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(() => {
-      const y = Math.min(scrollY, 900);
-      layers.forEach((l, i) => l.style.setProperty("--py", `${(-y * i * 0.015).toFixed(2)}px`));
-      ticking = false;
-    });
-  }, { passive: true });
-}
-
 applyLang(lang);
 setupBooking();
 setupHeader();
-setupParallax();
 requestAnimationFrame(() => document.body.classList.add("is-loaded"));

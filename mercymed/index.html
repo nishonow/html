@@ -90,13 +90,16 @@
           </div>
         </div>
         <div class="hero__art" aria-hidden="true">
-          <svg viewBox="28 22 72 78" preserveAspectRatio="xMidYMid slice">
-            <rect class="layer" width="100" height="100" fill="#E91E24"/>
-            <path class="layer" style="--d:1" d="M10 100V9l40 30 50-38v99z" fill="#F15A22"/>
-            <path class="layer" style="--d:2" d="M20 100V29l30 22 50-38v87z" fill="#F47B20"/>
-            <path class="layer" style="--d:3" d="M30 100V40l20 22 50-38v76z" fill="#F7941D"/>
-            <circle class="layer sun" style="--d:4" cx="97" cy="75" r="25" fill="#FDB813"/>
-            <circle class="layer sun" style="--d:5" cx="97" cy="75" r="16" fill="#FFF200"/>
+          <svg viewBox="0 0 100 100">
+            <defs><clipPath id="heroMark"><rect width="100" height="100"/></clipPath></defs>
+            <g clip-path="url(#heroMark)">
+              <rect class="layer" width="100" height="100" fill="#EB1C24"/>
+              <path class="layer" style="--d:1" d="M12 100V10l37.4 27.7L92.3 0H100v100z" fill="#F35822"/>
+              <path class="layer" style="--d:2" d="M20 100V28.5l30.1 22.4L100 7v93z" fill="#F67822"/>
+              <path class="layer" style="--d:3" d="M28 100V47.6l21.4 15.6L100 18.9V100z" fill="#F7941D"/>
+              <circle class="layer sun" style="--d:4" cx="92.4" cy="74.3" r="22.5" fill="#FDB813"/>
+              <circle class="layer sun" style="--d:5" cx="92.4" cy="74.3" r="12.3" fill="#FEF102"/>
+            </g>
           </svg>
         </div>
       </div>
