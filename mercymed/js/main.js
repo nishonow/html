@@ -1,5 +1,6 @@
 const LANGS = ["ru", "ky", "en"];
-const NUMBER_LOCALE = { ru: "ru-RU", ky: "ky-KG", en: "en-US" };
+const FLAG = { ru: "ru", ky: "kg", en: "en" };
+const NUMBER_LOCALE = { ru: "ru-RU", ky: "ru-RU", en: "en-US" };
 
 let lang = detectLang();
 let fitNav = () => {};
@@ -111,7 +112,9 @@ function applyLang(next, { animate = false } = {}) {
       const [attr, key] = el.dataset.i18nAttr.split(":");
       el.setAttribute(attr, t(key));
     });
-    document.querySelectorAll("[data-lang]").forEach((b) => b.setAttribute("aria-pressed", b.dataset.lang === lang));
+    document.querySelectorAll("[data-lang]").forEach((b) => b.setAttribute("aria-checked", b.dataset.lang === lang));
+    document.getElementById("langFlag").src = `img/flags/${FLAG[lang]}.svg`;
+    document.getElementById("langCode").textContent = FLAG[lang].toUpperCase();
 
     renderServices();
     renderPlans();
@@ -151,28 +154,50 @@ function observeReveal(elements) {
   });
 }
 
-function formatDate(iso) {
-  const [y, m, d] = iso.split("-");
-  return `${d}.${m}.${y}`;
+function maskDate(value) {
+  const digits = value.replace(/\D/g, "").slice(0, 8);
+  return [digits.slice(0, 2), digits.slice(2, 4), digits.slice(4)].filter(Boolean).join(".");
+}
+
+function isValidDob(value) {
+  const match = /^(\d{2})\.(\d{2})\.(\d{4})$/.exec(value);
+  if (!match) return false;
+  const [, d, m, y] = match.map(Number);
+  const date = new Date(y, m - 1, d);
+  return date.getFullYear() === y && date.getMonth() === m - 1 && date.getDate() === d && y >= 1900 && date <= new Date();
 }
 
 function setupBooking() {
   const form = document.getElementById("bookingForm");
   const error = document.getElementById("formError");
 
+  form.dob.addEventListener("input", () => {
+    form.dob.value = maskDate(form.dob.value);
+  });
+
+  form.addEventListener("input", (e) => {
+    e.target.setAttribute("aria-invalid", false);
+    if (!form.querySelector('[aria-invalid="true"]')) error.textContent = "";
+  });
+
+  new IntersectionObserver(([entry]) => {
+    document.body.classList.toggle("booking-in-view", entry.isIntersecting);
+  }, { rootMargin: "-20% 0px -20% 0px" }).observe(form);
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form));
     const missing = ["firstName", "lastName", "dob", "phone"].filter((k) => !data[k].trim());
-    const phoneOk = /^\+?[\d\s()-]{9,}$/.test(data.phone.trim());
+    const invalid = missing.length ? missing : [
+      !isValidDob(data.dob.trim()) && "dob",
+      !/^\+?[\d\s()-]{9,}$/.test(data.phone.trim()) && "phone",
+    ].filter(Boolean);
 
-    form.querySelectorAll("input").forEach((input) => {
-      const bad = missing.includes(input.name) || (input.name === "phone" && !missing.length && !phoneOk);
-      input.setAttribute("aria-invalid", bad);
-    });
+    form.querySelectorAll("input").forEach((input) => input.setAttribute("aria-invalid", invalid.includes(input.name)));
 
-    if (missing.length || !phoneOk) {
-      error.textContent = missing.length ? t("f_err_required") : t("f_err_phone");
+    if (invalid.length) {
+      error.textContent = missing.length ? t("f_err_required") : t(invalid[0] === "dob" ? "f_err_dob" : "f_err_phone");
+      form[invalid[0]].focus();
       return;
     }
     error.textContent = "";
@@ -182,7 +207,7 @@ function setupBooking() {
       "",
       `${t("wa_first")}: ${data.firstName.trim()}`,
       `${t("wa_last")}: ${data.lastName.trim()}`,
-      `${t("wa_dob")}: ${formatDate(data.dob)}`,
+      `${t("wa_dob")}: ${data.dob.trim()}`,
       `${t("wa_phone")}: ${data.phone.trim()}`,
     ].join("\n");
 
@@ -227,8 +252,20 @@ function setupHeader() {
   fitNav = fit;
   fit();
 
+  const langBox = document.getElementById("lang");
+  const langToggle = document.getElementById("langToggle");
+  const setLangMenu = (open) => {
+    langBox.classList.toggle("is-open", open);
+    langToggle.setAttribute("aria-expanded", open);
+  };
+  langToggle.addEventListener("click", () => setLangMenu(!langBox.classList.contains("is-open")));
+  document.addEventListener("click", (e) => !langBox.contains(e.target) && setLangMenu(false));
+  addEventListener("keydown", (e) => e.key === "Escape" && setLangMenu(false));
   document.querySelectorAll("[data-lang]").forEach((b) => {
-    b.addEventListener("click", () => b.dataset.lang !== lang && applyLang(b.dataset.lang, { animate: true }));
+    b.addEventListener("click", () => {
+      setLangMenu(false);
+      if (b.dataset.lang !== lang) applyLang(b.dataset.lang, { animate: true });
+    });
   });
 
   document.querySelectorAll(".js-wa").forEach((a) => {

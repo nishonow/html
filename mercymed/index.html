@@ -95,10 +95,17 @@
         <a href="#contact" data-i18n="nav_contact">Контакты</a>
       </nav>
       <div class="header__end">
-        <div class="lang" role="group" aria-label="Language">
-          <button type="button" data-lang="ru">RU</button>
-          <button type="button" data-lang="ky">KG</button>
-          <button type="button" data-lang="en">EN</button>
+        <div class="lang" id="lang">
+          <button type="button" class="lang__toggle" id="langToggle" aria-haspopup="true" aria-expanded="false" aria-controls="langMenu" aria-label="Язык · Тил · Language">
+            <span class="flag"><img src="img/flags/ru.svg" alt="" width="21" height="15" id="langFlag"></span>
+            <span id="langCode">RU</span>
+            <svg class="lang__chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg>
+          </button>
+          <ul class="lang__menu" id="langMenu" role="menu">
+            <li role="none"><button type="button" role="menuitemradio" data-lang="ru"><span class="flag"><img src="img/flags/ru.svg" alt="" width="21" height="15"></span>Русский</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="ky"><span class="flag"><img src="img/flags/kg.svg" alt="" width="21" height="15"></span>Кыргызча</button></li>
+            <li role="none"><button type="button" role="menuitemradio" data-lang="en"><span class="flag"><img src="img/flags/en.svg" alt="" width="21" height="15"></span>English</button></li>
+          </ul>
         </div>
         <a href="#booking" class="btn btn--primary btn--sm header__cta" data-i18n="cta_book">Записаться</a>
         <button type="button" class="burger" id="burger" aria-controls="nav" aria-expanded="false" data-i18n-attr="aria-label:menu_open" aria-label="Открыть меню"><span></span></button>
@@ -258,7 +265,7 @@
             <label class="field"><span data-i18n="f_last">Фамилия</span><input name="lastName" autocomplete="family-name" required></label>
           </div>
           <div class="form__row">
-            <label class="field"><span data-i18n="f_dob">Дата рождения</span><input type="date" name="dob" required></label>
+            <label class="field"><span data-i18n="f_dob">Дата рождения</span><input type="text" name="dob" inputmode="numeric" autocomplete="bday" maxlength="10" placeholder="ДД.ММ.ГГГГ" data-i18n-attr="placeholder:f_dob_ph" required></label>
             <label class="field"><span data-i18n="f_phone">Номер телефона</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+996" required></label>
           </div>
           <p class="form__error" id="formError" role="alert"></p>

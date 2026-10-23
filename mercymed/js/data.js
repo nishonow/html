@@ -127,20 +127,24 @@ const DOCTORS = [
     name: { ru: "Насыйкат Дононбаева", ky: "Насыйкат Дононбаева", en: "Nasyikat Dononbaeva" },
     role: { ru: "Пульмонолог, терапевт, высшая категория", ky: "Пульмонолог, терапевт, жогорку категория", en: "Pulmonologist, therapist, highest category" },
     years: 13, rating: 9.5, reviews: 2,
+    photo: ODOCTOR_IMG + "3qquSzqx1PS_CWFUQSnsZR6_LpE=/200x200/smart/filters:ffr()/media/doctors/dononbaeva-nasyykat-1784270254.png?_v=2",
   },
   {
     name: { ru: "Сымбат Садырбаева", ky: "Сымбат Садырбаева", en: "Symbat Sadyrbaeva" },
     role: { ru: "Акушер-гинеколог", ky: "Акушер-гинеколог", en: "Obstetrician-gynecologist" },
     years: 6, rating: 9, reviews: 2,
+    photo: ODOCTOR_IMG + "-cOCo0aOFwq0ZBH4uo7Bt7Tb208=/200x200/smart/filters:ffr()/media/doctors/sadyrbaeva-symbat.webp?_v=2",
   },
   {
     name: { ru: "Махабат Алиева", ky: "Махабат Алиева", en: "Makhabat Alieva" },
     role: { ru: "Физиотерапевт", ky: "Физиотерапевт", en: "Physiotherapist" },
     years: 24, rating: 10, reviews: 1,
+    photo: ODOCTOR_IMG + "E0hNaS6zzbxv_kl_Qi8UErYxZl4=/200x200/smart/filters:ffr()/media/doctors/aliyeva-makhabat.webp?_v=2",
   },
   {
     name: { ru: "Набат Гасымова", ky: "Набат Гасымова", en: "Nabat Gasymova" },
     role: { ru: "Детский анестезиолог-реаниматолог, педиатр", ky: "Балдар анестезиолог-реаниматологу, педиатр", en: "Pediatric anesthesiologist, pediatrician" },
     years: 4, rating: 10, reviews: 1,
+    photo: ODOCTOR_IMG + "NHP26YuioZ7CBmw1TNVf3WFP5Tk=/200x200/smart/filters:ffr()/media/doctors/gasimova-nabat.webp?_v=2",
   },
 ];
