@@ -317,14 +317,20 @@ function setupHeader() {
 
   const bar = document.querySelector(".header__bar");
   const fit = () => {
-    header.classList.remove("is-compact");
+    const ready = header.classList.contains("is-ready");
+    header.classList.remove("is-ready", "is-compact");
     header.classList.toggle("is-compact", innerWidth < 900 || bar.scrollWidth > bar.clientWidth + 1);
     if (!header.classList.contains("is-compact")) setMenu(false);
+    if (ready) {
+      void header.offsetWidth;
+      header.classList.add("is-ready");
+    }
   };
   addEventListener("resize", fit);
   document.fonts?.ready.then(fit);
   fitNav = fit;
   fit();
+  requestAnimationFrame(() => requestAnimationFrame(() => header.classList.add("is-ready")));
 
   const langBox = document.getElementById("lang");
   const langToggle = document.getElementById("langToggle");
