@@ -61,20 +61,72 @@ function renderTeam() {
   }).join("");
 }
 
-const FAQ_COUNT = 6;
+const KY_MONTHS = ["январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"];
 
-function renderFaq() {
-  const items = Array.from({ length: FAQ_COUNT }, (_, i) => [t(`faq_${i + 1}_q`), t(`faq_${i + 1}_a`)]);
-  document.getElementById("faqList").innerHTML = items.map(([q, a]) => `
-    <details class="faq__item">
-      <summary>${q}<span class="faq__icon" aria-hidden="true"></span></summary>
-      <div class="faq__answer"><p>${a}</p></div>
-    </details>`).join("");
-  document.getElementById("faqLd").textContent = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: items.map(([q, a]) => ({ "@type": "Question", name: q, acceptedAnswer: { "@type": "Answer", text: a } })),
+function formatNewsDate(iso) {
+  const date = new Date(iso);
+  if (lang === "ky") return `${date.getDate()}-${KY_MONTHS[date.getMonth()]}, ${date.getFullYear()}`;
+  return date.toLocaleDateString(lang === "ru" ? "ru-RU" : "en-GB", { day: "numeric", month: "long", year: "numeric" });
+}
+
+function renderNews() {
+  document.getElementById("newsList").innerHTML = NEWS.map((n) => {
+    const [title, text] = n[lang];
+    const media = n.image
+      ? `<img src="${n.image}" alt="" loading="lazy" onerror="this.replaceWith(document.createRange().createContextualFragment(icon('news')))">`
+      : icon(n.icon);
+    return `
+      <article class="news__item reveal">
+        <div class="news__media">${media}</div>
+        <time datetime="${n.date}">${formatNewsDate(n.date)}</time>
+        <h3>${title}</h3>
+        <p>${text}</p>
+      </article>`;
+  }).join("");
+}
+
+function renderPromo() {
+  const [title, text, cta] = PROMO[lang];
+  document.getElementById("promoTitle").textContent = title;
+  document.getElementById("promoText").textContent = text;
+  const link = document.getElementById("promoCta");
+  link.textContent = cta;
+  link.href = waLink(t("wa_doctor").replace("{name}", PROMO.whatsappTo[lang]));
+}
+
+function setupPromo() {
+  const dialog = document.getElementById("promo");
+  if (!PROMO.enabled || typeof dialog.showModal !== "function") return;
+  if (PROMO.showEvery === "session") {
+    try {
+      if (sessionStorage.getItem("promoSeen")) return;
+      sessionStorage.setItem("promoSeen", "1");
+    } catch {}
+  }
+
+  const img = document.getElementById("promoImg");
+  img.src = PROMO.image;
+  img.addEventListener("error", () => dialog.classList.add("promo--no-image"), { once: true });
+
+  const close = () => {
+    if (!dialog.open || dialog.classList.contains("is-closing")) return;
+    if (reducedMotion()) return dialog.close();
+    dialog.classList.add("is-closing");
+    dialog.addEventListener("animationend", () => {
+      dialog.classList.remove("is-closing");
+      dialog.close();
+    }, { once: true });
+  };
+
+  document.getElementById("promoClose").addEventListener("click", close);
+  document.getElementById("promoCta").addEventListener("click", close);
+  dialog.addEventListener("click", (e) => e.target === dialog && close());
+  dialog.addEventListener("cancel", (e) => {
+    e.preventDefault();
+    close();
   });
+
+  setTimeout(() => !document.body.classList.contains("nav-open") && dialog.showModal(), PROMO.delay);
 }
 
 function renderPhotos() {
@@ -119,7 +171,8 @@ function applyLang(next, { animate = false } = {}) {
     renderServices();
     renderPlans();
     renderTeam();
-    renderFaq();
+    renderNews();
+    renderPromo();
     observeReveal(document.querySelectorAll(".reveal:not(.is-visible)"));
     fitNav();
 
@@ -273,7 +326,6 @@ function setupHeader() {
     a.target = "_blank";
     a.rel = "noopener";
   });
-  document.querySelectorAll(".js-portal").forEach((a) => (a.href = CLINIC.portalUrl));
   document.getElementById("year").textContent = new Date().getFullYear();
 }
 
@@ -281,4 +333,5 @@ renderPhotos();
 applyLang(lang);
 setupBooking();
 setupHeader();
+setupPromo();
 requestAnimationFrame(() => document.body.classList.add("is-loaded"));

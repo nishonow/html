@@ -4,7 +4,6 @@ const CLINIC = {
   email: "medicalcenter@mercymed.kg",
   instagram: "mercymed.kg",
   gis: "https://2gis.kg/bishkek/firm/70000001080819179",
-  portalUrl: "#",
 };
 
 const PHOTOS = {
@@ -148,3 +147,40 @@ const DOCTORS = [
     photo: ODOCTOR_IMG + "NHP26YuioZ7CBmw1TNVf3WFP5Tk=/200x200/smart/filters:ffr()/media/doctors/gasimova-nabat.webp?_v=2",
   },
 ];
+
+const LUKAS = DOCTORS[0];
+
+const NEWS = [
+  {
+    date: "2026-10-20",
+    image: LUKAS.photo,
+    ru: ["В команде детский гематолог-онколог", "К нам присоединился Лукас Рафаэль Мейер-Ландольт, стаж 12 лет. Консультирует детей с заболеваниями крови и онкологией."],
+    ky: ["Командада балдар гематолог-онкологу", "Бизге 12 жылдык тажрыйбасы бар Лукас Рафаэль Мейер-Ландольт кошулду. Кан оорулары жана онкологиясы бар балдарга консультация берет."],
+    en: ["A pediatric hematologist-oncologist joins the team", "Lukas Rafael Meier-Landolt, with 12 years of experience, now consults children with blood disorders and cancer."],
+  },
+  {
+    date: "2026-10-10",
+    icon: "flask",
+    ru: ["Лаборатория на месте", "Анализы можно сдать прямо в клинике с понедельника по пятницу, 08:00–12:00."],
+    ky: ["Лаборатория ушул жерде", "Анализдерди клиниканын өзүндө дүйшөмбүдөн жумага чейин, 08:00–12:00 тапшырсаңыз болот."],
+    en: ["On-site laboratory", "Lab tests can be taken right at the clinic, Monday to Friday, 08:00–12:00."],
+  },
+  {
+    date: "2026-10-01",
+    icon: "chat",
+    ru: ["Запись через WhatsApp", "Заполните четыре поля на сайте — WhatsApp откроется с готовым сообщением администратору."],
+    ky: ["WhatsApp аркылуу жазылуу", "Сайтта төрт талааны толтуруңуз — WhatsApp администраторго даяр билдирүү менен ачылат."],
+    en: ["Book through WhatsApp", "Fill in four fields on the site and WhatsApp opens with a ready message to our administrator."],
+  },
+];
+
+const PROMO = {
+  enabled: true,
+  showEvery: "load",
+  delay: 1200,
+  image: LUKAS.photo,
+  whatsappTo: LUKAS.name,
+  ru: ["Новый врач в MercyMed", "Детский гематолог-онколог Лукас Рафаэль Мейер-Ландольт, стаж 12 лет. Консультации для детей с заболеваниями крови.", "Записаться к врачу"],
+  ky: ["MercyMed'де жаңы дарыгер", "Балдар гематолог-онкологу Лукас Рафаэль Мейер-Ландольт, 12 жылдык тажрыйба. Кан оорулары бар балдар үчүн консультациялар.", "Дарыгерге жазылуу"],
+  en: ["New doctor at MercyMed", "Pediatric hematologist-oncologist Lukas Rafael Meier-Landolt, 12 years of experience. Consultations for children with blood disorders.", "Book this doctor"],
+};

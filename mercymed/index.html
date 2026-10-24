@@ -91,7 +91,7 @@
         <a href="#team" data-i18n="nav_team">Врачи</a>
         <a href="#education" class="nav__extra" data-i18n="nav_education">Обучение</a>
         <a href="#charity" class="nav__extra" data-i18n="nav_charity">Благотворительность</a>
-        <a href="#faq" class="nav__extra" data-i18n="nav_faq">Вопросы</a>
+        <a href="#news" class="nav__extra" data-i18n="nav_news">Новости</a>
         <a href="#contact" data-i18n="nav_contact">Контакты</a>
       </nav>
       <div class="header__end">
@@ -306,10 +306,13 @@
       </div>
     </section>
 
-    <section class="section section--gray" id="faq">
-      <div class="container split">
-        <h2 class="reveal" data-i18n="faq_title">Частые вопросы</h2>
-        <div class="faq reveal" id="faqList"></div>
+    <section class="section section--gray" id="news">
+      <div class="container">
+        <header class="section__head reveal">
+          <h2 data-i18n="news_title">Новости</h2>
+          <p data-i18n="news_sub"></p>
+        </header>
+        <div class="news" id="newsList"></div>
       </div>
     </section>
 
@@ -368,7 +371,6 @@
       </div>
       <div class="footer__bottom">
         <p>© <span id="year"></span> MercyMed. <span data-i18n="footer_rights"></span></p>
-        <a href="#" class="js-portal" data-i18n="footer_portal"></a>
       </div>
     </div>
   </footer>
@@ -378,7 +380,18 @@
     <a href="#" class="btn btn--primary js-wa">WhatsApp</a>
   </div>
 
-  <script type="application/ld+json" id="faqLd"></script>
+  <dialog class="promo" id="promo" aria-labelledby="promoTitle">
+    <button type="button" class="promo__close" id="promoClose" data-i18n-attr="aria-label:promo_close" aria-label="Закрыть">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+    <div class="promo__media"><img id="promoImg" alt="" width="200" height="200"></div>
+    <div class="promo__body">
+      <h2 id="promoTitle" tabindex="-1" autofocus></h2>
+      <p id="promoText"></p>
+      <a class="btn btn--primary" id="promoCta" target="_blank" rel="noopener"></a>
+    </div>
+  </dialog>
+
   <script src="js/i18n.js"></script>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
