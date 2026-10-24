@@ -391,15 +391,6 @@ html:has(.promo[open]) { overflow: hidden; }
 .facts dd a { color: var(--text-2); }
 .facts dd a:hover { color: var(--text); text-decoration: none; }
 
-/* education + charity */
-.duo { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
-.duo__sub { margin-top: 16px; font-size: var(--t-lead); color: var(--text-2); }
-.stack-list { margin-top: 40px; }
-.stack-list__item { display: grid; grid-template-columns: 28px 1fr; gap: 16px; border-top: 1px solid var(--line); padding: 24px 0; }
-.stack-list__item .icon { margin: 0; }
-.stack-list__item p { margin-top: 6px; color: var(--text-2); }
-.duo .actions { margin-top: 16px; }
-
 /* contact */
 .contact { display: grid; gap: 28px; margin: 40px 0 0; }
 .contact dt { font-size: var(--t-small); color: var(--text-2); }
@@ -487,7 +478,6 @@ main, .footer { transition: opacity .2s ease; }
   .split { grid-template-columns: 1fr; gap: 48px; }
   .hero__head { grid-template-columns: 1fr; gap: 24px; }
   .columns, .list { grid-template-columns: 1fr; }
-  .duo { grid-template-columns: 1fr; gap: 56px; }
   .section__head--row { flex-direction: column; align-items: flex-start; }
   .list__item { display: grid; grid-template-columns: 28px 1fr; column-gap: 16px; padding: 22px 0; }
   .list__item .icon { grid-row: span 2; margin: 0; }
