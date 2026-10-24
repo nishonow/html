@@ -16,12 +16,15 @@
   <meta property="og:description" content="Педиатрия, семейная медицина и узкие специалисты. Русский, кыргызский, английский.">
   <meta property="og:url" content="https://mercymed.kg/">
   <meta property="og:image" content="https://mercymed.kg/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="theme-color" content="#FFFFFF">
   <link rel="icon" href="img/logo.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&text=MERCYD&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="img/hero.webp" imagesrcset="img/hero-900.webp 900w, img/hero.webp 1672w" imagesizes="(max-width: 1168px) 100vw, 1120px" fetchpriority="high">
   <link rel="stylesheet" href="css/styles.css">
   <script>document.documentElement.classList.add("js")</script>
   <script type="application/ld+json">
@@ -31,6 +34,7 @@
     "name": "MercyMed",
     "url": "https://mercymed.kg/",
     "logo": "https://mercymed.kg/img/logo.svg",
+    "image": "https://mercymed.kg/img/hero.webp",
     "telephone": "+996770231813",
     "email": "medicalcenter@mercymed.kg",
     "address": {
@@ -87,31 +91,20 @@
 
   <main id="main">
     <section class="hero" id="top">
-      <div class="container hero__grid">
-        <div class="hero__text">
-          <h1 class="reveal" data-i18n="hero_title">Врачи, у которых есть время для вашей семьи.</h1>
+      <div class="container hero__head">
+        <h1 class="reveal" data-i18n="hero_title">Врачи, у которых есть время для вашей семьи.</h1>
+        <div class="hero__side">
           <p class="lead reveal" data-i18n="hero_text">Педиатрия, семейная медицина и узкие специалисты в одном месте. Говорим на русском, кыргызском и английском.</p>
           <div class="actions reveal">
             <a href="#booking" class="btn btn--primary" data-i18n="cta_book">Записаться</a>
             <a href="#" class="btn btn--secondary js-wa" data-i18n="cta_whatsapp">Написать в WhatsApp</a>
           </div>
         </div>
-        <div class="hero__media">
-          <ul class="hero__doctors" id="heroDoctors" aria-hidden="true"></ul>
-          <div class="hero__art" aria-hidden="true">
-          <svg viewBox="0 0 100 100">
-            <defs><clipPath id="heroMark"><rect width="100" height="100"/></clipPath></defs>
-            <g clip-path="url(#heroMark)">
-              <rect class="layer" width="100" height="100" fill="#EB1C24"/>
-              <path class="layer" style="--d:1" d="M12 100V10l37.4 27.7L92.3 0H100v100z" fill="#F35822"/>
-              <path class="layer" style="--d:2" d="M20 100V28.5l30.1 22.4L100 7v93z" fill="#F67822"/>
-              <path class="layer" style="--d:3" d="M28 100V47.6l21.4 15.6L100 18.9V100z" fill="#F7941D"/>
-              <circle class="layer sun" style="--d:4" cx="92.4" cy="74.3" r="22.5" fill="#FDB813"/>
-              <circle class="layer sun" style="--d:5" cx="92.4" cy="74.3" r="12.3" fill="#FEF102"/>
-            </g>
-          </svg>
-          </div>
-        </div>
+      </div>
+      <div class="container">
+        <figure class="hero__photo">
+          <img id="heroImg" src="img/hero.webp" srcset="img/hero-900.webp 900w, img/hero.webp 1672w" sizes="(max-width: 1168px) 100vw, 1120px" width="1672" height="941" alt="Вход в медицинский центр MercyMed на улице Исакеева, Бишкек" data-i18n-attr="alt:hero_alt" fetchpriority="high" decoding="async">
+        </figure>
       </div>
       <div class="container">
         <dl class="info">

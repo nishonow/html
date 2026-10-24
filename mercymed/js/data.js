@@ -12,7 +12,7 @@ const CLINIC = {
 };
 
 const PHOTOS = {
-  hero: "",
+  hero: "img/hero.webp",
   gallery: [],
 };
 

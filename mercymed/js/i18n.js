@@ -19,6 +19,7 @@ const I18N = {
 
     hero_title: "Врачи, у которых есть время для вашей семьи.",
     hero_text: "Педиатрия, семейная медицина и узкие специалисты в одном месте. Говорим на русском, кыргызском и английском.",
+    hero_alt: "Вход в медицинский центр MercyMed на улице Исакеева, Бишкек",
     fact_doctors: "врачей в команде",
     fact_langs: "языка общения",
 
@@ -146,6 +147,7 @@ const I18N = {
 
     hero_title: "Үй-бүлөңүзгө убакыт бөлгөн дарыгерлер.",
     hero_text: "Педиатрия, үй-бүлөлүк медицина жана адистер бир жерде. Орус, кыргыз жана англис тилдеринде сүйлөйбүз.",
+    hero_alt: "Исакеев көчөсүндөгү MercyMed медициналык борборунун кире бериши, Бишкек",
     fact_doctors: "дарыгер командада",
     fact_langs: "тилде сүйлөйбүз",
 
@@ -273,6 +275,7 @@ const I18N = {
 
     hero_title: "Doctors who take time for your family.",
     hero_text: "Pediatrics, family medicine and specialists in one place. We speak Russian, Kyrgyz and English.",
+    hero_alt: "Entrance to MercyMed medical center on Isakeeva Street, Bishkek",
     fact_doctors: "doctors on the team",
     fact_langs: "languages spoken",
 

@@ -158,20 +158,10 @@ function setupPromo() {
 }
 
 function renderHero() {
-  const media = document.querySelector(".hero__media");
-  media.classList.remove("has-doctors");
-  if (DATA.photos.hero) {
-    media.innerHTML = `<div class="hero__art hero__art--photo"><img src="${DATA.photos.hero}" alt="MercyMed" fetchpriority="high"></div>`;
-  } else {
-    const withPhoto = DATA.doctors.filter((d) => d.photo).slice(0, 4);
-    if (withPhoto.length === 4) {
-      media.classList.add("has-doctors");
-      document.getElementById("heroDoctors").innerHTML = withPhoto
-        .map((d, i) => `<li style="--d:${i}"><img src="${esc(d.photo)}" alt="" width="200" height="200" fetchpriority="high"></li>`).join("");
-      media.querySelectorAll(".hero__doctors img").forEach((img) =>
-        img.addEventListener("error", () => media.classList.remove("has-doctors"), { once: true }));
-    }
-  }
+  const img = document.getElementById("heroImg");
+  const src = DATA.photos.hero || DEFAULT_DATA.photos.hero;
+  if (src !== DEFAULT_DATA.photos.hero) img.removeAttribute("srcset");
+  if (img.getAttribute("src") !== src) img.src = src;
   if (DATA.photos.gallery.length) {
     document.getElementById("gallery").hidden = false;
     document.getElementById("galleryList").innerHTML = DATA.photos.gallery

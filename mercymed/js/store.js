@@ -1,5 +1,5 @@
 const STORE_KEY = "mercymed:site:v1";
-const EDITABLE = ["clinic", "doctors", "news", "promo"];
+const EDITABLE = ["clinic", "doctors", "news", "promo", "photos"];
 
 const Store = {
   load() {

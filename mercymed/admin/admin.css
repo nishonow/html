@@ -96,6 +96,8 @@
 .lf__row input { width: 100%; height: 48px; padding: 0 14px; border: 1px solid var(--line); border-radius: var(--r-sm); font: 400 max(16px, 1rem) var(--font); color: var(--text); }
 .form-actions { display: flex; gap: 12px; padding-top: 4px; }
 
+.hero-preview { aspect-ratio: 16 / 9; border-radius: var(--r-sm); overflow: hidden; background: var(--gray); }
+.hero-preview img { width: 100%; height: 100%; object-fit: cover; }
 .img-field { display: flex; align-items: center; gap: 20px; }
 .img-field__preview { width: 160px; aspect-ratio: 16 / 10; border-radius: var(--r-sm); overflow: hidden; background: var(--gray); display: grid; place-items: center; color: var(--text-2); font-size: var(--t-small); flex: none; }
 .img-field__preview--square { width: 112px; aspect-ratio: 1; }

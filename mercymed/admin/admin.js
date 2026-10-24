@@ -7,11 +7,12 @@ const NEWS_ICONS = [
 ];
 
 let DATA = Store.load();
-let current = "news";
+let current = "hero";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const icon = (name) => `<svg class="icon" aria-hidden="true"><use href="#i-${name}"/></svg>`;
+const asset = (src) => (!src || /^(data:|https?:|blob:)/.test(src) ? src : `../${src}`);
 const flag = (code) => `<img class="lf__flag" src="../img/flags/${code}.svg" alt="" width="21" height="15">`;
 
 function toast(message, isError = false) {
@@ -53,7 +54,7 @@ function field(name, label, value = "", attrs = "") {
 function imageField(value, { round = false } = {}) {
   return `
     <div class="img-field">
-      <div class="img-field__preview${round ? " img-field__preview--square" : ""}">${value ? `<img src="${esc(value)}" alt="">` : "<span>Нет фото</span>"}</div>
+      <div class="img-field__preview${round ? " img-field__preview--square" : ""}">${value ? `<img src="${esc(asset(value))}" alt="">` : "<span>Нет фото</span>"}</div>
       <div class="img-field__actions">
         <label class="btn btn--secondary btn--sm">Загрузить фото<input type="file" accept="image/*" data-image hidden></label>
         ${value ? '<button type="button" class="btn btn--ghost btn--sm" data-remove-image>Убрать фото</button>' : ""}
@@ -92,7 +93,7 @@ function bindImageField(form) {
   if (!box) return;
   const setImage = (src) => {
     form.elements.image.value = src;
-    $(".img-field__preview", box).innerHTML = src ? `<img src="${esc(src)}" alt="">` : "<span>Нет фото</span>";
+    $(".img-field__preview", box).innerHTML = src ? `<img src="${esc(asset(src))}" alt="">` : "<span>Нет фото</span>";
     form.dispatchEvent(new Event("imagechange"));
   };
   box.addEventListener("change", async (e) => {
@@ -108,6 +109,41 @@ function bindImageField(form) {
 
 function formatDate(iso) {
   return new Date(iso).toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" });
+}
+
+/* ---------- hero ---------- */
+
+function heroView() {
+  const isDefault = DATA.photos.hero === DEFAULT_DATA.photos.hero;
+  return `
+    <header class="view__head">
+      <div><h1>Главное фото</h1><p>Большое фото в начале страницы. Лучше всего горизонтальное, не меньше 1600 пикселей в ширину.</p></div>
+      <a class="btn btn--secondary" href="../index.html" target="_blank" rel="noopener">Открыть сайт ↗</a>
+    </header>
+    <form class="card form-grid" id="editor">
+      <div class="hero-preview"><img src="${esc(asset(DATA.photos.hero || DEFAULT_DATA.photos.hero))}" alt=""></div>
+      <input type="hidden" name="image" value="${esc(DATA.photos.hero)}">
+      <div class="form-actions">
+        <label class="btn btn--primary">Загрузить новое фото<input type="file" accept="image/*" data-hero hidden></label>
+        ${isDefault ? "" : '<button type="button" class="btn btn--secondary" data-restore>Вернуть исходное</button>'}
+      </div>
+    </form>`;
+}
+
+function bindHero() {
+  const save = (src) => {
+    DATA.photos = { ...DATA.photos, hero: src };
+    if (persist()) show("hero");
+  };
+  $("[data-hero]").addEventListener("change", async (e) => {
+    if (!e.target.files[0]) return;
+    try {
+      save(await resizeImage(e.target.files[0], 2000));
+    } catch {
+      toast("Не удалось прочитать файл", true);
+    }
+  });
+  $("[data-restore]")?.addEventListener("click", () => save(DEFAULT_DATA.photos.hero));
 }
 
 /* ---------- news ---------- */
@@ -358,6 +394,7 @@ function bindData() {
 /* ---------- shell ---------- */
 
 const VIEWS = {
+  hero: { render: heroView, bind: bindHero },
   news: { render: newsList, editor: newsEditor, bindEditor: bindNewsEditor, list: () => DATA.news, confirm: "Удалить новость?" },
   doctors: { render: doctorsList, editor: doctorEditor, bindEditor: bindDoctorEditor, list: () => DATA.doctors, confirm: "Удалить врача?" },
   promo: { render: promoView, bind: bindPromo },
