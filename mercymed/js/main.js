@@ -2,6 +2,7 @@ const LANGS = ["ru", "ky", "en"];
 const FLAG = { ru: "ru", ky: "kg", en: "en" };
 const NUMBER_LOCALE = { ru: "ru-RU", ky: "ru-RU", en: "en-US" };
 
+let DATA = Store.load();
 let lang = detectLang();
 let fitNav = () => {};
 
@@ -16,46 +17,48 @@ function detectLang() {
   return LANGS.includes(browser) ? browser : "ru";
 }
 
-const t = (key) => I18N[lang][key] ?? I18N.ru[key] ?? "";
+const CLINIC_TEXT = { info_address_v: "address", c_address_v: "addressFull", info_hours_v: "hours", c_hours_v: "hoursFull", info_price_v: "price" };
+const t = (key) => (CLINIC_TEXT[key] ? DATA.clinic[CLINIC_TEXT[key]]?.[lang] : I18N[lang][key] ?? I18N.ru[key]) ?? "";
+const esc = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const num = (n) => n.toLocaleString(NUMBER_LOCALE[lang]);
 const plural = (n, word) => PLURAL[lang](n, WORDS[word][lang]);
-const waLink = (text) => `https://wa.me/${CLINIC.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
+const waLink = (text) => `https://wa.me/${DATA.clinic.whatsapp}${text ? `?text=${encodeURIComponent(text)}` : ""}`;
 const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const icon = (name) => `<svg class="icon" aria-hidden="true"><use href="#i-${name}"/></svg>`;
 const PERSON_SVG = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>';
 
 function renderServices() {
-  document.getElementById("servicesList").innerHTML = SERVICES.map((s) => {
+  document.getElementById("servicesList").innerHTML = DATA.services.map((s) => {
     const [title, text] = s[lang];
     return `<li class="list__item reveal">${icon(s.icon)}<h3>${title}</h3><p>${text}</p></li>`;
   }).join("");
 }
 
 function renderPlans() {
-  document.getElementById("plansList").innerHTML = PLANS.map((p) => {
+  document.getElementById("plansList").innerHTML = DATA.plans.map((p) => {
     const [title, text] = p[lang];
     return `<article class="column reveal">${icon(p.icon)}<h3>${title}</h3><p>${text}</p></article>`;
   }).join("");
 }
 
 function renderTeam() {
-  document.getElementById("teamList").innerHTML = DOCTORS.map((d) => {
-    const name = d.name[lang];
+  document.getElementById("teamList").innerHTML = DATA.doctors.map((d) => {
+    const name = esc(d.name[lang]);
     const photo = d.photo
-      ? `<img src="${d.photo}" alt="${name}" width="200" height="200" loading="lazy" decoding="async" onerror="this.replaceWith(document.createRange().createContextualFragment(PERSON_SVG))">`
+      ? `<img src="${esc(d.photo)}" alt="${name}" width="200" height="200" loading="lazy" decoding="async" onerror="this.replaceWith(document.createRange().createContextualFragment(PERSON_SVG))">`
       : PERSON_SVG;
     const meta = [];
-    if (d.years) meta.push(`${WORDS.experience[lang]} ${d.years} ${plural(d.years, "years")}`);
-    meta.push(d.rating ? `★ ${num(d.rating)} · ${d.reviews} ${plural(d.reviews, "reviews")}` : t("team_new"));
+    if (+d.years) meta.push(`${WORDS.experience[lang]} ${d.years} ${plural(d.years, "years")}`);
+    meta.push(+d.rating ? `★ ${num(d.rating)} · ${d.reviews} ${plural(d.reviews, "reviews")}` : t("team_new"));
     return `
       <li class="doctor reveal">
         <div class="doctor__photo">${photo}</div>
         <h3>${name}</h3>
-        <p class="doctor__role">${d.role[lang]}</p>
+        <p class="doctor__role">${esc(d.role[lang])}</p>
         <div class="doctor__foot">
           <p class="doctor__meta">${meta.join("<br>")}</p>
-          <a class="doctor__book" href="${waLink(t("wa_doctor").replace("{name}", name))}" target="_blank" rel="noopener">${t("doc_book")} <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="doctor__book" href="${esc(waLink(t("wa_doctor").replace("{name}", d.name[lang])))}" target="_blank" rel="noopener">${t("doc_book")} <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </li>`;
   }).join("");
@@ -70,11 +73,13 @@ function formatNewsDate(iso) {
 }
 
 function renderNews() {
-  document.getElementById("newsList").innerHTML = NEWS.map((n) => {
-    const [title, text] = n[lang];
+  const latest = [...DATA.news].sort((a, b) => b.date.localeCompare(a.date)).slice(0, 6);
+  document.getElementById("news").hidden = !latest.length;
+  document.getElementById("newsList").innerHTML = latest.map((n) => {
+    const [title, text] = n[lang].map(esc);
     const media = n.image
-      ? `<img src="${n.image}" alt="" loading="lazy" onerror="this.replaceWith(document.createRange().createContextualFragment(icon('news')))">`
-      : icon(n.icon);
+      ? `<img src="${esc(n.image)}" alt="" loading="lazy" onerror="this.replaceWith(document.createRange().createContextualFragment(icon('news')))">`
+      : icon(n.icon || "news");
     return `
       <article class="news__item reveal">
         <div class="news__media">${media}</div>
@@ -86,27 +91,50 @@ function renderNews() {
 }
 
 function renderPromo() {
-  const [title, text, cta] = PROMO[lang];
+  const [title, text, cta, message] = DATA.promo[lang];
   document.getElementById("promoTitle").textContent = title;
   document.getElementById("promoText").textContent = text;
   const link = document.getElementById("promoCta");
   link.textContent = cta;
-  link.href = waLink(t("wa_doctor").replace("{name}", PROMO.whatsappTo[lang]));
+  link.href = waLink(message);
+  const dialog = document.getElementById("promo");
+  const img = document.getElementById("promoImg");
+  dialog.classList.toggle("promo--no-image", !DATA.promo.image);
+  if (DATA.promo.image && img.getAttribute("src") !== DATA.promo.image) img.src = DATA.promo.image;
+}
+
+function renderContacts() {
+  document.querySelectorAll(".js-phone").forEach((a) => {
+    a.textContent = DATA.clinic.phone;
+    a.href = `tel:${DATA.clinic.phone.replace(/[^\d+]/g, "")}`;
+  });
+  document.querySelectorAll(".js-tel").forEach((a) => (a.href = `tel:${DATA.clinic.phone.replace(/[^\d+]/g, "")}`));
+  document.querySelectorAll(".js-email").forEach((a) => {
+    a.textContent = DATA.clinic.email;
+    a.href = `mailto:${DATA.clinic.email}`;
+  });
+  document.querySelectorAll(".js-wa").forEach((a) => {
+    a.href = waLink();
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
+}
+
+function shouldShowPromo() {
+  if (new URLSearchParams(location.search).get("promo") === "preview") return true;
+  if (!DATA.promo.enabled) return false;
+  if (DATA.promo.showEvery !== "session") return true;
+  try {
+    if (sessionStorage.getItem("promoSeen")) return false;
+    sessionStorage.setItem("promoSeen", "1");
+  } catch {}
+  return true;
 }
 
 function setupPromo() {
   const dialog = document.getElementById("promo");
-  if (!PROMO.enabled || typeof dialog.showModal !== "function") return;
-  if (PROMO.showEvery === "session") {
-    try {
-      if (sessionStorage.getItem("promoSeen")) return;
-      sessionStorage.setItem("promoSeen", "1");
-    } catch {}
-  }
-
-  const img = document.getElementById("promoImg");
-  img.src = PROMO.image;
-  img.addEventListener("error", () => dialog.classList.add("promo--no-image"), { once: true });
+  document.getElementById("promoImg").addEventListener("error", () => dialog.classList.add("promo--no-image"));
+  if (typeof dialog.showModal !== "function" || !shouldShowPromo()) return;
 
   const close = () => {
     if (!dialog.open || dialog.classList.contains("is-closing")) return;
@@ -126,26 +154,27 @@ function setupPromo() {
     close();
   });
 
-  setTimeout(() => !document.body.classList.contains("nav-open") && dialog.showModal(), PROMO.delay);
+  setTimeout(() => !document.body.classList.contains("nav-open") && dialog.showModal(), DATA.promo.delay);
 }
 
-function renderPhotos() {
+function renderHero() {
   const media = document.querySelector(".hero__media");
-  if (PHOTOS.hero) {
-    media.innerHTML = `<div class="hero__art hero__art--photo"><img src="${PHOTOS.hero}" alt="MercyMed" fetchpriority="high"></div>`;
+  media.classList.remove("has-doctors");
+  if (DATA.photos.hero) {
+    media.innerHTML = `<div class="hero__art hero__art--photo"><img src="${DATA.photos.hero}" alt="MercyMed" fetchpriority="high"></div>`;
   } else {
-    const withPhoto = DOCTORS.filter((d) => d.photo).slice(0, 4);
+    const withPhoto = DATA.doctors.filter((d) => d.photo).slice(0, 4);
     if (withPhoto.length === 4) {
       media.classList.add("has-doctors");
       document.getElementById("heroDoctors").innerHTML = withPhoto
-        .map((d, i) => `<li style="--d:${i}"><img src="${d.photo}" alt="" width="200" height="200" fetchpriority="high"></li>`).join("");
+        .map((d, i) => `<li style="--d:${i}"><img src="${esc(d.photo)}" alt="" width="200" height="200" fetchpriority="high"></li>`).join("");
       media.querySelectorAll(".hero__doctors img").forEach((img) =>
         img.addEventListener("error", () => media.classList.remove("has-doctors"), { once: true }));
     }
   }
-  if (PHOTOS.gallery.length) {
+  if (DATA.photos.gallery.length) {
     document.getElementById("gallery").hidden = false;
-    document.getElementById("galleryList").innerHTML = PHOTOS.gallery
+    document.getElementById("galleryList").innerHTML = DATA.photos.gallery
       .map((src) => `<figure class="reveal"><img src="${src}" alt="${t("gallery_title")}" loading="lazy"></figure>`).join("");
   }
 }
@@ -168,6 +197,8 @@ function applyLang(next, { animate = false } = {}) {
     document.getElementById("langFlag").src = `img/flags/${FLAG[lang]}.svg`;
     document.getElementById("langCode").textContent = FLAG[lang].toUpperCase();
 
+    renderHero();
+    renderContacts();
     renderServices();
     renderPlans();
     renderTeam();
@@ -321,16 +352,15 @@ function setupHeader() {
     });
   });
 
-  document.querySelectorAll(".js-wa").forEach((a) => {
-    a.href = waLink();
-    a.target = "_blank";
-    a.rel = "noopener";
-  });
   document.getElementById("year").textContent = new Date().getFullYear();
 }
 
-renderPhotos();
 applyLang(lang);
+addEventListener("storage", (e) => {
+  if (e.key !== STORE_KEY && e.key !== null) return;
+  DATA = Store.load();
+  applyLang(lang);
+});
 setupBooking();
 setupHeader();
 setupPromo();

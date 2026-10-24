@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>MercyMed — Панель управления</title>
+  <link rel="icon" href="../img/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&text=MERCYD&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin">
+  <section class="login" id="login">
+    <form class="login__card" id="loginForm">
+      <span class="logo"><img src="../img/logo.svg" alt="" width="32" height="32"><span class="wordmark">MERCY<b>MED</b></span></span>
+      <h1>Панель управления</h1>
+      <label class="field"><span>Пароль</span><input type="password" name="password" autocomplete="current-password" required></label>
+      <p class="form__error" id="loginError" role="alert"></p>
+      <button type="submit" class="btn btn--primary btn--block">Войти</button>
+    </form>
+  </section>
+
+  <div class="app" id="app" hidden>
+    <header class="bar">
+      <span class="logo"><img src="../img/logo.svg" alt="" width="28" height="28"><span class="wordmark">MERCY<b>MED</b></span></span>
+      <div class="bar__actions">
+        <a class="btn btn--secondary btn--sm" href="../index.html" target="_blank" rel="noopener">Открыть сайт ↗</a>
+        <button type="button" class="btn btn--secondary btn--sm" id="logout">Выйти</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav class="sidenav" id="sidenav" aria-label="Разделы">
+        <button type="button" data-view="news">Новости</button>
+        <button type="button" data-view="promo">Промо-окно</button>
+        <button type="button" data-view="doctors">Врачи</button>
+        <button type="button" data-view="contacts">Контакты</button>
+        <button type="button" data-view="data">Данные</button>
+      </nav>
+      <main class="view" id="view" tabindex="-1"></main>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="../js/icons.js"></script>
+  <script src="../js/data.js"></script>
+  <script src="../js/store.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
