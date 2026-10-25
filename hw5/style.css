@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: url("https://cdn.imgchest.com/files/w7w6cvr8eye.png");
+    opacity: .5;
+    background-repeat: no-repeat;
+}
+
+.container {
+    max-width: 1400px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+}
+
+.container > * {
+    background-color: lightblue;
+    font-size: 10rem;
+    color: blue;
+    border: 2px dashed blue;
+    height: 200px;
+    flex-grow: 1;
+}
+
+.box1 {
+    flex-basis: 100%;
+}
+
+.box2 {
+    flex-basis: 235px;
+}
+
+.box3 {
+    flex-basis: 565px;
+}
+
+.box4 {
+    flex-basis: 564px;
+}
+
+.box5 {
+    flex-basis: 1110px;
+}
+
+.box6 {
+    flex-basis: 269px;
+}
