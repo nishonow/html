@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://mercymed.kg/ru/</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://mercymed.kg/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ky" href="https://mercymed.kg/ky/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mercymed.kg/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mercymed.kg/ru/"/>
+  </url>
+  <url>
+    <loc>https://mercymed.kg/ky/</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://mercymed.kg/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ky" href="https://mercymed.kg/ky/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mercymed.kg/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mercymed.kg/ru/"/>
+  </url>
+  <url>
+    <loc>https://mercymed.kg/en/</loc>
+    <lastmod>2026-10-27</lastmod>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://mercymed.kg/ru/"/>
+    <xhtml:link rel="alternate" hreflang="ky" href="https://mercymed.kg/ky/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://mercymed.kg/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mercymed.kg/ru/"/>
+  </url>
+</urlset>
