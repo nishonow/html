@@ -527,6 +527,10 @@ function setupHeader() {
     setMenu(false);
   });
   addEventListener("keydown", (e) => e.key === "Escape" && setMenu(false));
+  // a tap on the dimmed page under the menu closes it
+  document.addEventListener("click", (e) => {
+    if (document.body.classList.contains("nav-open") && !nav.contains(e.target) && !burger.contains(e.target)) setMenu(false);
+  });
 
   const header = document.querySelector(".header");
   const onScroll = () => header.classList.toggle("is-scrolled", scrollY > 8);
@@ -560,6 +564,8 @@ function setupHeader() {
 
   const bar = document.querySelector(".header__bar");
   const fit = () => {
+    // phones are always compact; skip re-measuring when the address bar resizes the page
+    if (innerWidth < 900 && header.classList.contains("is-compact")) return;
     const ready = header.classList.contains("is-ready");
     header.classList.remove("is-ready", "is-compact");
     header.classList.toggle("is-compact", innerWidth < 900 || bar.scrollWidth > bar.clientWidth + 1);
