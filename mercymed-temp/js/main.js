@@ -127,6 +127,7 @@ function renderTeam() {
         <div class="doctor__photo">${photo}</div>
         <h3>${name}</h3>
         <p class="doctor__role">${esc(d.role[lang])}</p>
+        ${d.bio ? `<p class="doctor__bio">${esc(d.bio[lang])}</p>` : ""}
         <div class="doctor__foot">
           <p class="doctor__meta">${meta.join("<br>")}</p>
           <a class="doctor__book" href="${esc(waLink(t("wa_doctor").replace("{name}", d.name[lang])))}" target="_blank" rel="noopener">${t("doc_book")} <span class="arrow" aria-hidden="true">→</span></a>

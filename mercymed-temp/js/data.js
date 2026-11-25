@@ -145,13 +145,15 @@ const DOCTORS = [
     name: { ru: "Лукас Рафаэль Мейер-Ландольт", ky: "Лукас Рафаэль Мейер-Ландольт", en: "Lukas Rafael Meier-Landolt" },
     role: { ru: "Детский гематолог-онколог, педиатр", ky: "Балдар гематолог-онкологу, педиатр", en: "Pediatric hematologist-oncologist, pediatrician" },
     years: 12,
-    photo: TEAM_IMG + "lukas.png",
+    bio: { ru: "Педиатр из Швейцарии, также консультирует детей с заболеваниями крови и онкологией. Работает в MercyMed больше года, ведёт приём на немецком, французском и английском.", ky: "Швейцариялык педиатр, кан оорулары жана онкологиясы бар балдарга да консультация берет. MercyMed’де бир жылдан ашык иштейт, немис, француз жана англис тилдеринде кабыл алат.", en: "Swiss pediatrician who also sees children with blood disorders and cancer. With MercyMed for over a year, he consults in German, French and English." },
+    photo: TEAM_IMG + "lukas.webp",
   },
   {
     services: ["pediatrics"],
     name: { ru: "Нэнси Яу", ky: "Нэнси Яу", en: "Nancy Yau" },
     role: { ru: "Педиатр", ky: "Педиатр", en: "Pediatrician" },
     years: 17,
+    bio: { ru: "Педиатр в нашей международной команде. Ведёт приём также на китайском языке.", ky: "Эл аралык командабыздагы педиатр. Кытай тилинде да кабыл алат.", en: "Pediatrician on our international team. She also sees patients in Chinese." },
     photo: TEAM_IMG + "nancy.webp",
   },
   {
@@ -159,6 +161,7 @@ const DOCTORS = [
     name: { ru: "Джонатан Уильямс", ky: "Джонатан Уильямс", en: "Jonathan Williams" },
     role: { ru: "Главный врач, педиатр", ky: "Башкы дарыгер, педиатр", en: "Chief doctor, pediatrician" },
     rating: 10, reviews: 6,
+    bio: { ru: "Главный врач и педиатр. Больше 10 лет назад вместе с Махабат начал выездные клиники, из которых вырос MercyMed.", ky: "Башкы дарыгер жана педиатр. 10 жылдан ашык мурун Махабат менен бирге көчмө клиникаларды баштаган, MercyMed ошолордон өсүп чыккан.", en: "Chief doctor and pediatrician. Over 10 years ago he and Makhabat started the mobile clinics that MercyMed grew out of." },
     photo: TEAM_IMG + "jonathan.webp",
   },
   {
@@ -166,6 +169,7 @@ const DOCTORS = [
     name: { ru: "Ирина Пак", ky: "Ирина Пак", en: "Irina Pak" },
     role: { ru: "Педиатр, терапевт", ky: "Педиатр, терапевт", en: "Pediatrician, therapist" },
     years: 16, rating: 9.5, reviews: 24,
+    bio: { ru: "Педиатр и семейный врач из Кыргызстана, принимает детей и взрослых. Давно работает в нашей команде.", ky: "Кыргызстандык педиатр жана үй-бүлөлүк дарыгер, балдарды жана чоңдорду кабыл алат. Командабызда көптөн бери иштейт.", en: "Pediatrician and family doctor from Kyrgyzstan who sees both children and adults. A long-standing member of our team." },
     photo: TEAM_IMG + "irina.webp",
   },
   {
@@ -173,13 +177,15 @@ const DOCTORS = [
     name: { ru: "Насыйкат Дононбаева", ky: "Насыйкат Дононбаева", en: "Nasyikat Dononbaeva" },
     role: { ru: "Пульмонолог, терапевт, высшая категория", ky: "Пульмонолог, терапевт, жогорку категория", en: "Pulmonologist, therapist, highest category" },
     years: 13, rating: 9.5, reviews: 2,
-    photo: TEAM_IMG + "nasyikat.png",
+    bio: { ru: "Терапевт и пульмонолог из Кыргызстана, лечит взрослых с болезнями лёгких. Давно работает в нашей команде.", ky: "Кыргызстандык терапевт жана пульмонолог, өпкө оорулары бар чоңдорду дарылайт. Командабызда көптөн бери иштейт.", en: "Internal medicine doctor and pulmonologist from Kyrgyzstan, caring for adults with lung conditions. A long-standing member of our team." },
+    photo: TEAM_IMG + "nasyikat.webp",
   },
   {
     services: ["obgyn"],
     name: { ru: "Сымбат Садырбаева", ky: "Сымбат Садырбаева", en: "Symbat Sadyrbaeva" },
     role: { ru: "Акушер-гинеколог", ky: "Акушер-гинеколог", en: "Obstetrician-gynecologist" },
     years: 6, rating: 9, reviews: 2,
+    bio: { ru: "Гинеколог из Кыргызстана. Принимает женщин на консультации и ведёт беременность.", ky: "Кыргызстандык гинеколог. Аялдарды консультацияга кабыл алат жана кош бойлуулукту көзөмөлдөйт.", en: "Gynecologist from Kyrgyzstan. She sees women for consultations and pregnancy care." },
     photo: TEAM_IMG + "symbat.webp",
   },
   {
@@ -187,6 +193,7 @@ const DOCTORS = [
     name: { ru: "Махабат Алиева", ky: "Махабат Алиева", en: "Makhabat Alieva" },
     role: { ru: "Директор, доула", ky: "Директор, доула", en: "Director, doula" },
     years: 24, rating: 10, reviews: 1,
+    bio: { ru: "Медсестра, директор и сертифицированная доула. Вместе с Джонатаном начала выездные клиники и проводит курсы подготовки к родам.", ky: "Медайым, директор жана тастыкталган доула. Джонатан менен бирге көчмө клиникаларды баштаган жана төрөткө даярдоо курстарын өткөрөт.", en: "Nurse, director and certified doula. She started the mobile clinics with Jonathan and runs our birth preparation courses." },
     photo: TEAM_IMG + "makhabat.webp",
   },
   {
@@ -194,17 +201,21 @@ const DOCTORS = [
     name: { ru: "Набат Гасымова", ky: "Набат Гасымова", en: "Nabat Gasymova" },
     role: { ru: "Детский анестезиолог-реаниматолог, педиатр", ky: "Балдар анестезиолог-реаниматологу, педиатр", en: "Pediatric anesthesiologist, pediatrician" },
     years: 4, rating: 10, reviews: 1,
+    bio: { ru: "Педиатр и врач интенсивной терапии из Кыргызстана. Давно работает в нашей команде.", ky: "Кыргызстандык педиатр жана интенсивдүү терапия дарыгери. Командабызда көптөн бери иштейт.", en: "Pediatrician and intensive care doctor from Kyrgyzstan. A long-standing member of our team." },
     photo: TEAM_IMG + "nabat.webp",
   },
   {
     services: ["physio"],
     name: { ru: "Мэдисон Смит", ky: "Мэдисон Смит", en: "Madison Smith" },
     role: { ru: "Физиотерапевт", ky: "Физиотерапевт", en: "Physical therapist" },
+    bio: { ru: "Физиотерапевт в нашей международной команде. Помогает пациентам восстановить движение и силу.", ky: "Эл аралык командабыздагы физиотерапевт. Бейтаптарга кыймылды жана күчтү калыбына келтирүүгө жардам берет.", en: "Physical therapist on our international team. She helps patients regain movement and strength." },
+    photo: TEAM_IMG + "madison.webp",
   },
   {
     services: ["ultrasound"],
     name: { ru: "Наргиза Исламова", ky: "Наргиза Исламова", en: "Nargiza Islamova" },
     role: { ru: "Врач УЗИ", ky: "УЗИ дарыгери", en: "Ultrasound" },
+    bio: { ru: "Врач УЗИ из Кыргызстана. Проводит УЗИ в клинике по направлению врача.", ky: "Кыргызстандык УЗИ дарыгери. Дарыгердин жолдомосу менен клиникада УЗИ жасайт.", en: "Ultrasound specialist from Kyrgyzstan. She does ultrasound scans at the clinic after a doctor’s referral." },
   },
 ];
 

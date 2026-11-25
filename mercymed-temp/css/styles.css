@@ -397,6 +397,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .doctor:hover .doctor__photo img { transform: scale(1.04); }
 .doctor__photo svg { width: 36%; fill: none; stroke: #C7C7CC; stroke-width: 1.2; stroke-linecap: round; }
 .doctor__role { margin-top: 4px; color: var(--text-2); }
+.doctor__bio { margin-top: 8px; font-size: var(--t-small); line-height: 1.55; color: var(--text); }
 .doctor { display: flex; flex-direction: column; }
 .doctor__foot { margin-top: auto; padding-top: 12px; }
 .doctor__meta { min-height: calc(2em * 1.55); font-size: var(--t-small); line-height: 1.55; color: var(--text-2); }
