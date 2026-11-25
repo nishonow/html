@@ -69,20 +69,20 @@
       </a>
       <nav class="nav" id="nav" aria-label="Main">
         <div class="nav__group">
-          <button type="button" class="nav__trigger" aria-expanded="false" aria-controls="navClinic"><span data-i18n="nav_clinic">Клиника</span><svg class="nav__chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg></button>
-          <div class="nav__menu" id="navClinic">
-            <a href="#about" data-i18n="nav_about">О клинике</a>
-            <a href="#team" data-i18n="nav_team">Врачи</a>
-            <a href="#education" data-i18n="nav_education">Обучение</a>
-            <a href="#charity" data-i18n="nav_charity">Выездные клиники</a>
-          </div>
-        </div>
-        <div class="nav__group">
           <button type="button" class="nav__trigger" aria-expanded="false" aria-controls="navServices"><span data-i18n="nav_services">Услуги</span><svg class="nav__chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg></button>
           <div class="nav__menu" id="navServices">
             <a href="#services" data-i18n="nav_services_all">Медицинские услуги</a>
-            <a href="#corporate" data-i18n="nav_corporate">Корпоративным</a>
             <a href="#international" data-i18n="nav_international">Иностранцам</a>
+            <a href="#corporate" data-i18n="nav_corporate">Корпоративным</a>
+          </div>
+        </div>
+        <a href="#team" data-i18n="nav_team">Врачи</a>
+        <div class="nav__group">
+          <button type="button" class="nav__trigger" aria-expanded="false" aria-controls="navClinic"><span data-i18n="nav_clinic">Клиника</span><svg class="nav__chevron" viewBox="0 0 12 12" aria-hidden="true"><path d="m3 4.5 3 3 3-3"/></svg></button>
+          <div class="nav__menu" id="navClinic">
+            <a href="#about" data-i18n="nav_about">О клинике</a>
+            <a href="#education" data-i18n="nav_education">Обучение</a>
+            <a href="#charity" data-i18n="nav_charity">Выездные клиники</a>
           </div>
         </div>
         <a href="#news" data-i18n="nav_news">Новости</a>
@@ -133,25 +133,6 @@
       </div>
     </section>
 
-    <section class="section" id="about">
-      <div class="container split">
-        <h2 class="reveal" data-i18n="about_title">Спокойная клиника, где всё объясняют.</h2>
-        <div class="prose reveal">
-          <p data-i18n="about_p1"></p>
-          <p data-i18n="about_p2"></p>
-          <p data-i18n="about_p3"></p>
-        </div>
-      </div>
-      <div class="container">
-        <dl class="facts">
-          <div class="reveal"><dt>10</dt><dd data-i18n="fact_doctors">человек в команде</dd></div>
-          <div class="reveal"><dt>6</dt><dd data-i18n="fact_langs">языков консультаций</dd></div>
-          <div class="reveal"><dt>5,0</dt><dd><a href="https://2gis.kg/bishkek/firm/70000001080819179/tab/reviews" target="_blank" rel="noopener"><span data-i18n="stat_2gis">оценка в 2ГИС</span> <span class="arrow" aria-hidden="true">→</span></a></dd></div>
-          <div class="reveal"><dt>9,6</dt><dd><a href="https://odoctor.kg/clinics/bishkek/mercymed#reviews" target="_blank" rel="noopener"><span data-i18n="stat_odoctor">из 10 на odoctor.kg</span> <span class="arrow" aria-hidden="true">→</span></a></dd></div>
-        </dl>
-      </div>
-    </section>
-
     <section class="section section--gray" id="services">
       <div class="container">
         <header class="section__head reveal">
@@ -163,37 +144,6 @@
           <article class="svc__panel" id="svcPanel" aria-live="polite"></article>
         </div>
         <p class="svc__note reveal" data-i18n="svc_note"></p>
-      </div>
-    </section>
-
-    <section class="section" id="corporate">
-      <div class="container">
-        <header class="section__head reveal">
-          <h2 data-i18n="corp_title">Компаниям и организациям</h2>
-          <p data-i18n="corp_sub"></p>
-        </header>
-        <div class="columns" id="plansList"></div>
-        <div class="actions reveal">
-          <a href="#" class="btn btn--primary js-wa" data-i18n="corp_cta">Запросить предложение</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--dark" id="international">
-      <div class="container split">
-        <div class="reveal">
-          <h2 data-i18n="intl_title"></h2>
-          <p class="lead" data-i18n="intl_text"></p>
-          <div class="actions">
-            <a href="#booking" class="btn btn--primary" data-i18n="intl_cta">Записаться на английском</a>
-          </div>
-        </div>
-        <dl class="pairs">
-          <div class="reveal"><dt><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg><span data-i18n="intl_1_t"></span></dt><dd data-i18n="intl_1_d"></dd></div>
-          <div class="reveal"><dt><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg><span data-i18n="intl_2_t"></span></dt><dd data-i18n="intl_2_d"></dd></div>
-          <div class="reveal"><dt><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span data-i18n="intl_3_t"></span></dt><dd data-i18n="intl_3_d"></dd></div>
-          <div class="reveal"><dt><svg class="icon" aria-hidden="true"><use href="#i-signpost"/></svg><span data-i18n="intl_4_t"></span></dt><dd data-i18n="intl_4_d"></dd></div>
-        </dl>
       </div>
     </section>
 
@@ -218,17 +168,67 @@
         </div>
         <form class="form reveal" id="bookingForm" novalidate>
           <div class="form__row">
-            <label class="field"><span data-i18n="f_first">Имя</span><input name="firstName" autocomplete="given-name" required></label>
-            <label class="field"><span data-i18n="f_last">Фамилия</span><input name="lastName" autocomplete="family-name" required></label>
+            <label class="field"><span data-i18n="f_first">Имя</span><input name="firstName" autocomplete="given-name" aria-describedby="err-firstName" required><span class="field__error" id="err-firstName"></span></label>
+            <label class="field"><span data-i18n="f_last">Фамилия</span><input name="lastName" autocomplete="family-name" aria-describedby="err-lastName" required><span class="field__error" id="err-lastName"></span></label>
           </div>
           <div class="form__row">
-            <label class="field"><span data-i18n="f_dob">Дата рождения</span><input type="text" name="dob" inputmode="numeric" autocomplete="bday" maxlength="10" placeholder="ДД.ММ.ГГГГ" data-i18n-attr="placeholder:f_dob_ph" required></label>
-            <label class="field"><span data-i18n="f_phone">Номер телефона</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+996" required></label>
+            <label class="field"><span data-i18n="f_dob">Дата рождения</span><input type="text" name="dob" inputmode="numeric" autocomplete="bday" maxlength="10" placeholder="ДД.ММ.ГГГГ" data-i18n-attr="placeholder:f_dob_ph" aria-describedby="err-dob" required><span class="field__error" id="err-dob"></span></label>
+            <label class="field"><span data-i18n="f_phone">Номер телефона</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+996" aria-describedby="err-phone" required><span class="field__error" id="err-phone"></span></label>
           </div>
           <p class="form__error" id="formError" role="alert"></p>
           <button type="submit" class="btn btn--primary btn--block" data-i18n="f_submit">Отправить в WhatsApp</button>
           <p class="form__note" data-i18n="f_note"></p>
         </form>
+      </div>
+    </section>
+
+    <section class="section section--dark" id="international">
+      <div class="container split">
+        <div class="reveal">
+          <h2 data-i18n="intl_title"></h2>
+          <p class="lead" data-i18n="intl_text"></p>
+          <div class="actions">
+            <a href="#booking" class="btn btn--primary" data-i18n="intl_cta">Записаться на английском</a>
+          </div>
+        </div>
+        <dl class="pairs">
+          <div class="reveal"><dt><svg class="icon" aria-hidden="true"><use href="#i-globe"/></svg><span data-i18n="intl_1_t"></span></dt><dd data-i18n="intl_1_d"></dd></div>
+          <div class="reveal"><dt><svg class="icon" aria-hidden="true"><use href="#i-file"/></svg><span data-i18n="intl_2_t"></span></dt><dd data-i18n="intl_2_d"></dd></div>
+          <div class="reveal"><dt><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg><span data-i18n="intl_3_t"></span></dt><dd data-i18n="intl_3_d"></dd></div>
+          <div class="reveal"><dt><svg class="icon" aria-hidden="true"><use href="#i-signpost"/></svg><span data-i18n="intl_4_t"></span></dt><dd data-i18n="intl_4_d"></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section" id="corporate">
+      <div class="container">
+        <header class="section__head reveal">
+          <h2 data-i18n="corp_title">Компаниям и организациям</h2>
+          <p data-i18n="corp_sub"></p>
+        </header>
+        <div class="columns" id="plansList"></div>
+        <div class="actions reveal">
+          <a href="#" class="btn btn--primary js-wa" data-i18n="corp_cta">Запросить предложение</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--gray" id="about">
+      <div class="container split">
+        <h2 class="reveal" data-i18n="about_title">Спокойная клиника, где всё объясняют.</h2>
+        <div class="prose reveal">
+          <p data-i18n="about_p1"></p>
+          <p data-i18n="about_p2"></p>
+          <p data-i18n="about_p3"></p>
+        </div>
+      </div>
+      <div class="container">
+        <dl class="facts">
+          <div class="reveal"><dt>10</dt><dd data-i18n="fact_doctors">человек в команде</dd></div>
+          <div class="reveal"><dt>6</dt><dd data-i18n="fact_langs">языков консультаций</dd></div>
+          <div class="reveal"><dt>5,0</dt><dd><a href="https://2gis.kg/bishkek/firm/70000001080819179/tab/reviews" target="_blank" rel="noopener"><span data-i18n="stat_2gis">оценка в 2ГИС</span> <span class="arrow" aria-hidden="true">→</span></a></dd></div>
+          <div class="reveal"><dt>9,6</dt><dd><a href="https://odoctor.kg/clinics/bishkek/mercymed#reviews" target="_blank" rel="noopener"><span data-i18n="stat_odoctor">из 10 на odoctor.kg</span> <span class="arrow" aria-hidden="true">→</span></a></dd></div>
+        </dl>
       </div>
     </section>
 

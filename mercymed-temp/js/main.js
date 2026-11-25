@@ -439,32 +439,53 @@ function isValidDob(value) {
   return date.getFullYear() === y && date.getMonth() === m - 1 && date.getDate() === d && y >= 1900 && date <= new Date();
 }
 
+// +996… must be a full Kyrgyz number (12 digits), 0… a local one (10),
+// a bare 9-digit number is local without the 0; other countries: 8–15 digits.
+function isValidPhone(value) {
+  if (!/^\+?[\d\s().-]+$/.test(value)) return false;
+  const digits = value.replace(/\D/g, "");
+  if (digits.startsWith("996")) return digits.length === 12;
+  if (value.startsWith("+")) return digits.length >= 8 && digits.length <= 15;
+  if (digits.startsWith("0")) return digits.length === 10;
+  return digits.length === 9;
+}
+
+const BOOKING_FIELDS = ["firstName", "lastName", "dob", "phone"];
+
+function fieldError(name, value) {
+  if (!value) return name === "dob" || name === "phone" ? `f_err_${name}_empty` : `f_err_${name}`;
+  if (name === "dob" && !isValidDob(value)) return "f_err_dob";
+  if (name === "phone" && !isValidPhone(value)) return "f_err_phone";
+  return "";
+}
+
 function setupBooking() {
   const form = document.getElementById("bookingForm");
   const error = document.getElementById("formError");
+  const show = (name, key) => {
+    form[name].setAttribute("aria-invalid", !!key);
+    document.getElementById(`err-${name}`).textContent = key ? t(key) : "";
+  };
 
   form.dob.addEventListener("input", () => {
     form.dob.value = maskDate(form.dob.value);
   });
 
   form.addEventListener("input", (e) => {
-    e.target.setAttribute("aria-invalid", false);
-    if (!form.querySelector('[aria-invalid="true"]')) error.textContent = "";
+    if (BOOKING_FIELDS.includes(e.target.name)) show(e.target.name, "");
+    error.textContent = "";
   });
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     const data = Object.fromEntries(new FormData(form));
-    const missing = ["firstName", "lastName", "dob", "phone"].filter((k) => !data[k].trim());
-    const invalid = missing.length ? missing : [
-      !isValidDob(data.dob.trim()) && "dob",
-      !/^\+?[\d\s()-]{9,}$/.test(data.phone.trim()) && "phone",
-    ].filter(Boolean);
-
-    form.querySelectorAll("input").forEach((input) => input.setAttribute("aria-invalid", invalid.includes(input.name)));
+    const errors = BOOKING_FIELDS.map((name) => [name, fieldError(name, data[name].trim())]);
+    errors.forEach(([name, key]) => show(name, key));
+    const invalid = errors.filter(([, key]) => key).map(([name]) => name);
 
     if (invalid.length) {
-      error.textContent = missing.length ? t("f_err_required") : t(invalid[0] === "dob" ? "f_err_dob" : "f_err_phone");
+      // one summary line only when the whole form is empty
+      error.textContent = BOOKING_FIELDS.every((name) => !data[name].trim()) ? t("f_err_required") : "";
       form[invalid[0]].focus();
       return;
     }

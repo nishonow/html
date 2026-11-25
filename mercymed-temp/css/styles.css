@@ -562,6 +562,8 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .field input::placeholder { color: #A1A1A6; }
 .field input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px rgba(247, 148, 29, .2); }
 .field input[aria-invalid="true"] { border-color: var(--error); }
+.field .field__error { margin-top: -2px; color: var(--error); font-weight: 400; }
+.field .field__error:empty { display: none; }
 .form__error { color: var(--error); font-size: var(--t-small); }
 .form__error:empty { display: none; }
 .form__note { font-size: var(--t-small); color: var(--text-2); text-align: center; }
